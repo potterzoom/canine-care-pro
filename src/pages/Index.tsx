@@ -1,13 +1,24 @@
-
-import React from 'react';
+import React, { useState } from 'react';
 import Header from '../components/Header';
 import StatsCard from '../components/StatsCard';
 import AppointmentCard from '../components/AppointmentCard';
 import PatientCard from '../components/PatientCard';
 import InventoryItem from '../components/InventoryItem';
-import { Calendar, User, Bell, Plus } from 'lucide-react';
+import AlertsModal from '../components/AlertsModal';
+import ConfigModal from '../components/ConfigModal';
+import NewAppointmentModal from '../components/NewAppointmentModal';
+import PatientHistoryModal from '../components/PatientHistoryModal';
+import ContactModal from '../components/ContactModal';
+import { Calendar, User, Bell, Plus, Settings, FileText, Phone } from 'lucide-react';
 
 const Index = () => {
+  // Estados para controlar los modales
+  const [alertsOpen, setAlertsOpen] = useState(false);
+  const [configOpen, setConfigOpen] = useState(false);
+  const [newAppointmentOpen, setNewAppointmentOpen] = useState(false);
+  const [historyOpen, setHistoryOpen] = useState(false);
+  const [contactOpen, setContactOpen] = useState(false);
+
   // Datos de ejemplo
   const todayStats = [
     {
@@ -125,10 +136,55 @@ const Index = () => {
           </p>
         </div>
 
+        {/* Botones de acceso rápido a modales */}
+        <div className="mb-8 flex flex-wrap gap-4">
+          <button 
+            onClick={() => setAlertsOpen(true)}
+            className="flex items-center space-x-2 px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-lg transition-colors"
+          >
+            <Bell className="w-4 h-4" />
+            <span>Ver Alertas</span>
+          </button>
+          
+          <button 
+            onClick={() => setNewAppointmentOpen(true)}
+            className="flex items-center space-x-2 px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg transition-colors"
+          >
+            <Plus className="w-4 h-4" />
+            <span>Nueva Cita</span>
+          </button>
+          
+          <button 
+            onClick={() => setHistoryOpen(true)}
+            className="flex items-center space-x-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors"
+          >
+            <FileText className="w-4 h-4" />
+            <span>Ver Historia</span>
+          </button>
+          
+          <button 
+            onClick={() => setContactOpen(true)}
+            className="flex items-center space-x-2 px-4 py-2 bg-purple-500 hover:bg-purple-600 text-white rounded-lg transition-colors"
+          >
+            <Phone className="w-4 h-4" />
+            <span>Contactar</span>
+          </button>
+          
+          <button 
+            onClick={() => setConfigOpen(true)}
+            className="flex items-center space-x-2 px-4 py-2 bg-slate-500 hover:bg-slate-600 text-white rounded-lg transition-colors"
+          >
+            <Settings className="w-4 h-4" />
+            <span>Configuración</span>
+          </button>
+        </div>
+
         {/* Estadísticas del día */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           {todayStats.map((stat, index) => (
-            <StatsCard key={index} {...stat} />
+            <div key={index} onClick={() => stat.title === "Alertas" && setAlertsOpen(true)} className={stat.title === "Alertas" ? "cursor-pointer" : ""}>
+              <StatsCard {...stat} />
+            </div>
           ))}
         </div>
 
@@ -138,7 +194,10 @@ const Index = () => {
             <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
               <div className="flex items-center justify-between mb-6">
                 <h3 className="text-lg font-semibold text-slate-800">Citas de Hoy</h3>
-                <button className="flex items-center space-x-2 px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg transition-colors">
+                <button 
+                  onClick={() => setNewAppointmentOpen(true)}
+                  className="flex items-center space-x-2 px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg transition-colors"
+                >
                   <Plus className="w-4 h-4" />
                   <span>Nueva Cita</span>
                 </button>
@@ -184,7 +243,10 @@ const Index = () => {
             <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
               <h3 className="text-lg font-semibold text-slate-800 mb-6">Accesos Rápidos</h3>
               <div className="space-y-3">
-                <button className="w-full flex items-center space-x-3 p-3 text-left hover:bg-slate-50 rounded-lg transition-colors">
+                <button 
+                  onClick={() => setHistoryOpen(true)}
+                  className="w-full flex items-center space-x-3 p-3 text-left hover:bg-slate-50 rounded-lg transition-colors"
+                >
                   <span className="text-xl">📋</span>
                   <div>
                     <p className="font-medium text-slate-800">Nueva Historia Clínica</p>
@@ -208,7 +270,10 @@ const Index = () => {
                   </div>
                 </button>
                 
-                <button className="w-full flex items-center space-x-3 p-3 text-left hover:bg-slate-50 rounded-lg transition-colors">
+                <button 
+                  onClick={() => setContactOpen(true)}
+                  className="w-full flex items-center space-x-3 p-3 text-left hover:bg-slate-50 rounded-lg transition-colors"
+                >
                   <span className="text-xl">📱</span>
                   <div>
                     <p className="font-medium text-slate-800">Teleconsulta</p>
@@ -220,6 +285,13 @@ const Index = () => {
           </div>
         </div>
       </main>
+
+      {/* Modales */}
+      <AlertsModal open={alertsOpen} onOpenChange={setAlertsOpen} />
+      <ConfigModal open={configOpen} onOpenChange={setConfigOpen} />
+      <NewAppointmentModal open={newAppointmentOpen} onOpenChange={setNewAppointmentOpen} />
+      <PatientHistoryModal open={historyOpen} onOpenChange={setHistoryOpen} />
+      <ContactModal open={contactOpen} onOpenChange={setContactOpen} />
     </div>
   );
 };
