@@ -11,6 +11,8 @@ interface PatientCardProps {
   lastVisit: string;
   nextVaccine?: string;
   urgent?: boolean;
+  onViewHistory?: () => void;
+  onContact?: () => void;
 }
 
 const PatientCard = ({ 
@@ -21,7 +23,9 @@ const PatientCard = ({
   owner, 
   lastVisit, 
   nextVaccine,
-  urgent = false 
+  urgent = false,
+  onViewHistory,
+  onContact
 }: PatientCardProps) => {
   const speciesEmoji = species.toLowerCase().includes('perro') ? '🐕' : 
                       species.toLowerCase().includes('gato') ? '🐱' : '🐾';
@@ -63,10 +67,16 @@ const PatientCard = ({
       </div>
       
       <div className="mt-4 flex space-x-2">
-        <button className="flex-1 px-3 py-2 text-sm font-medium text-green-700 bg-green-50 hover:bg-green-100 rounded-lg transition-colors">
+        <button 
+          onClick={onViewHistory}
+          className="flex-1 px-3 py-2 text-sm font-medium text-green-700 bg-green-50 hover:bg-green-100 rounded-lg transition-colors"
+        >
           Ver Historia
         </button>
-        <button className="px-3 py-2 text-sm font-medium text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors">
+        <button 
+          onClick={onContact}
+          className="px-3 py-2 text-sm font-medium text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors"
+        >
           Contactar
         </button>
       </div>
