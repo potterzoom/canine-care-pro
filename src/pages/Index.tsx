@@ -9,7 +9,11 @@ import ConfigModal from '../components/ConfigModal';
 import NewAppointmentModal from '../components/NewAppointmentModal';
 import PatientHistoryModal from '../components/PatientHistoryModal';
 import ContactModal from '../components/ContactModal';
-import { Calendar, User, Bell, Plus, Settings, FileText, Phone } from 'lucide-react';
+import NewMedicalHistoryModal from '../components/NewMedicalHistoryModal';
+import VaccineControlModal from '../components/VaccineControlModal';
+import BillingModal from '../components/BillingModal';
+import TelemedicineModal from '../components/TelemedicineModal';
+import { Calendar, User, Bell, Plus, Settings, FileText, Phone, Syringe, Receipt, Video } from 'lucide-react';
 
 const Index = () => {
   // Estados para controlar los modales
@@ -18,6 +22,10 @@ const Index = () => {
   const [newAppointmentOpen, setNewAppointmentOpen] = useState(false);
   const [historyOpen, setHistoryOpen] = useState(false);
   const [contactOpen, setContactOpen] = useState(false);
+  const [newMedicalHistoryOpen, setNewMedicalHistoryOpen] = useState(false);
+  const [vaccineControlOpen, setVaccineControlOpen] = useState(false);
+  const [billingOpen, setBillingOpen] = useState(false);
+  const [telemedicineOpen, setTelemedicineOpen] = useState(false);
 
   // Datos de ejemplo
   const todayStats = [
@@ -244,7 +252,7 @@ const Index = () => {
               <h3 className="text-lg font-semibold text-slate-800 mb-6">Accesos Rápidos</h3>
               <div className="space-y-3">
                 <button 
-                  onClick={() => setHistoryOpen(true)}
+                  onClick={() => setNewMedicalHistoryOpen(true)}
                   className="w-full flex items-center space-x-3 p-3 text-left hover:bg-slate-50 rounded-lg transition-colors"
                 >
                   <span className="text-xl">📋</span>
@@ -254,7 +262,10 @@ const Index = () => {
                   </div>
                 </button>
                 
-                <button className="w-full flex items-center space-x-3 p-3 text-left hover:bg-slate-50 rounded-lg transition-colors">
+                <button 
+                  onClick={() => setVaccineControlOpen(true)}
+                  className="w-full flex items-center space-x-3 p-3 text-left hover:bg-slate-50 rounded-lg transition-colors"
+                >
                   <span className="text-xl">💉</span>
                   <div>
                     <p className="font-medium text-slate-800">Control de Vacunas</p>
@@ -262,7 +273,10 @@ const Index = () => {
                   </div>
                 </button>
                 
-                <button className="w-full flex items-center space-x-3 p-3 text-left hover:bg-slate-50 rounded-lg transition-colors">
+                <button 
+                  onClick={() => setBillingOpen(true)}
+                  className="w-full flex items-center space-x-3 p-3 text-left hover:bg-slate-50 rounded-lg transition-colors"
+                >
                   <span className="text-xl">📄</span>
                   <div>
                     <p className="font-medium text-slate-800">Facturación</p>
@@ -271,7 +285,7 @@ const Index = () => {
                 </button>
                 
                 <button 
-                  onClick={() => setContactOpen(true)}
+                  onClick={() => setTelemedicineOpen(true)}
                   className="w-full flex items-center space-x-3 p-3 text-left hover:bg-slate-50 rounded-lg transition-colors"
                 >
                   <span className="text-xl">📱</span>
@@ -292,6 +306,10 @@ const Index = () => {
       <NewAppointmentModal open={newAppointmentOpen} onOpenChange={setNewAppointmentOpen} />
       <PatientHistoryModal open={historyOpen} onOpenChange={setHistoryOpen} />
       <ContactModal open={contactOpen} onOpenChange={setContactOpen} />
+      <NewMedicalHistoryModal open={newMedicalHistoryOpen} onOpenChange={setNewMedicalHistoryOpen} />
+      <VaccineControlModal open={vaccineControlOpen} onOpenChange={setVaccineControlOpen} />
+      <BillingModal open={billingOpen} onOpenChange={setBillingOpen} />
+      <TelemedicineModal open={telemedicineOpen} onOpenChange={setTelemedicineOpen} />
     </div>
   );
 };
