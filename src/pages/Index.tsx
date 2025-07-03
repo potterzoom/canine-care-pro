@@ -13,6 +13,7 @@ import NewMedicalHistoryModal from '../components/NewMedicalHistoryModal';
 import VaccineControlModal from '../components/VaccineControlModal';
 import BillingModal from '../components/BillingModal';
 import TelemedicineModal from '../components/TelemedicineModal';
+import ClientSearchModal from '../components/ClientSearchModal';
 import { Calendar, User, Bell, Plus, Settings, FileText, Phone, Syringe, Receipt, Video } from 'lucide-react';
 
 const Index = () => {
@@ -26,6 +27,11 @@ const Index = () => {
   const [vaccineControlOpen, setVaccineControlOpen] = useState(false);
   const [billingOpen, setBillingOpen] = useState(false);
   const [telemedicineOpen, setTelemedicineOpen] = useState(false);
+  
+  // Estados para el buscador de clientes
+  const [clientSearchOpen, setClientSearchOpen] = useState(false);
+  const [searchAction, setSearchAction] = useState<'history' | 'contact'>('history');
+  const [selectedClient, setSelectedClient] = useState<any>(null);
 
   // Datos de ejemplo
   const todayStats = [
@@ -129,6 +135,25 @@ const Index = () => {
     }
   ];
 
+  const handleSearchHistory = () => {
+    setSearchAction('history');
+    setClientSearchOpen(true);
+  };
+
+  const handleSearchContact = () => {
+    setSearchAction('contact');
+    setClientSearchOpen(true);
+  };
+
+  const handleClientSelect = (client: any) => {
+    setSelectedClient(client);
+    if (searchAction === 'history') {
+      setHistoryOpen(true);
+    } else {
+      setContactOpen(true);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-slate-50">
       <Header />
@@ -163,7 +188,7 @@ const Index = () => {
           </button>
           
           <button 
-            onClick={() => setHistoryOpen(true)}
+            onClick={handleSearchHistory}
             className="flex items-center space-x-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors"
           >
             <FileText className="w-4 h-4" />
@@ -171,7 +196,7 @@ const Index = () => {
           </button>
           
           <button 
-            onClick={() => setContactOpen(true)}
+            onClick={handleSearchContact}
             className="flex items-center space-x-2 px-4 py-2 bg-purple-500 hover:bg-purple-600 text-white rounded-lg transition-colors"
           >
             <Phone className="w-4 h-4" />
@@ -309,12 +334,29 @@ const Index = () => {
       <AlertsModal open={alertsOpen} onOpenChange={setAlertsOpen} />
       <ConfigModal open={configOpen} onOpenChange={setConfigOpen} />
       <NewAppointmentModal open={newAppointmentOpen} onOpenChange={setNewAppointmentOpen} />
-      <PatientHistoryModal open={historyOpen} onOpenChange={setHistoryOpen} />
-      <ContactModal open={contactOpen} onOpenChange={setContactOpen} />
+      <PatientHistoryModal 
+        open={historyOpen} 
+        onOpenChange={setHistoryOpen}
+        patientName={selectedClient?.petName}
+      />
+      <ContactModal 
+        open={contactOpen} 
+        onOpenChange={setContactOpen}
+        contactName={selectedClient?.name}
+        contactPhone={selectedClient?.phone}
+      />
       <NewMedicalHistoryModal open={newMedicalHistoryOpen} onOpenChange={setNewMedicalHistoryOpen} />
       <VaccineControlModal open={vaccineControlOpen} onOpenChange={setVaccineControlOpen} />
       <BillingModal open={billingOpen} onOpenChange={setBillingOpen} />
       <TelemedicineModal open={telemedicineOpen} onOpenChange={setTelemedicineOpen} />
+      
+      {/* Modal de búsqueda de clientes */}
+      <ClientSearchModal
+        open={clientSearchOpen}
+        onOpenChange={setClientSearchOpen}
+        onClientSelect={handleClientSelect}
+        title={searchAction === 'history' ? 'Buscar Cliente - Ver Historia' : 'Buscar Cliente - Contactar'}
+      />
     </div>
   );
 };
