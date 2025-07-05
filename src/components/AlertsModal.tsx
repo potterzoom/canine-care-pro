@@ -53,15 +53,15 @@ const AlertsModal = ({ open, onOpenChange }: AlertsModalProps) => {
         
         <div className="space-y-4 max-h-96 overflow-y-auto">
           {alerts.map((alert) => (
-            <Alert key={alert.id} className={`${alert.urgent ? 'border-red-200 bg-red-50' : 'border-blue-200 bg-blue-50'}`}>
+            <Alert key={alert.id} className={`${alert.urgent ? 'border-gray-400 bg-gray-100' : 'border-gray-300 bg-gray-50'}`}>
               <alert.icon className="h-4 w-4" />
               <AlertDescription>
                 <div className="space-y-1">
                   <div className="flex justify-between items-start">
                     <p className="font-medium text-sm">{alert.title}</p>
-                    <span className="text-xs text-slate-500">{alert.time}</span>
+                    <span className="text-xs text-gray-500">{alert.time}</span>
                   </div>
-                  <p className="text-sm text-slate-600">{alert.message}</p>
+                  <p className="text-sm text-gray-600">{alert.message}</p>
                 </div>
               </AlertDescription>
             </Alert>
@@ -72,7 +72,7 @@ const AlertsModal = ({ open, onOpenChange }: AlertsModalProps) => {
           <Button variant="outline" onClick={() => onOpenChange(false)}>
             Cerrar
           </Button>
-          <Button>
+          <Button className="bg-gray-800 hover:bg-black">
             Marcar Todo Leído
           </Button>
         </div>

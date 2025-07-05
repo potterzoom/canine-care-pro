@@ -44,8 +44,8 @@ const BillingModal = ({ open, onOpenChange }: BillingModalProps) => {
 
   const getStatusColor = (status: string) => {
     return status === 'pagada' 
-      ? 'bg-green-100 text-green-800' 
-      : 'bg-yellow-100 text-yellow-800';
+      ? 'bg-gray-200 text-gray-800' 
+      : 'bg-gray-100 text-gray-700';
   };
 
   return (
@@ -60,12 +60,12 @@ const BillingModal = ({ open, onOpenChange }: BillingModalProps) => {
         
         <div className="space-y-6">
           {/* Nueva factura */}
-          <div className="bg-slate-50 p-4 rounded-lg space-y-4">
+          <div className="bg-gray-50 p-4 rounded-lg space-y-4">
             <h3 className="font-semibold">Generar Nueva Factura</h3>
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <Label htmlFor="clientSelect">Cliente</Label>
-                <select id="clientSelect" className="w-full p-2 border rounded-md">
+                <select id="clientSelect" className="w-full p-2 border border-gray-300 rounded-md bg-white">
                   <option value="">Seleccionar cliente...</option>
                   <option value="juan">Juan Pérez</option>
                   <option value="maria">María García</option>
@@ -81,7 +81,7 @@ const BillingModal = ({ open, onOpenChange }: BillingModalProps) => {
             {/* Servicios */}
             <div className="space-y-2">
               <Label>Servicios</Label>
-              <div className="border rounded-md p-4 space-y-3">
+              <div className="border border-gray-300 rounded-md p-4 space-y-3 bg-white">
                 <div className="grid grid-cols-4 gap-2 items-end">
                   <div>
                     <Label htmlFor="service1">Servicio/Producto</Label>
@@ -101,7 +101,7 @@ const BillingModal = ({ open, onOpenChange }: BillingModalProps) => {
                 </div>
                 
                 {/* Items agregados */}
-                <div className="border-t pt-3 space-y-2">
+                <div className="border-t border-gray-200 pt-3 space-y-2">
                   <div className="flex justify-between items-center text-sm">
                     <span>Consulta General x1</span>
                     <span>$35.00</span>
@@ -112,7 +112,7 @@ const BillingModal = ({ open, onOpenChange }: BillingModalProps) => {
                   </div>
                 </div>
                 
-                <div className="border-t pt-2 space-y-1">
+                <div className="border-t border-gray-200 pt-2 space-y-1">
                   <div className="flex justify-between text-sm">
                     <span>Subtotal:</span>
                     <span>$60.00</span>
@@ -130,7 +130,7 @@ const BillingModal = ({ open, onOpenChange }: BillingModalProps) => {
             </div>
             
             <div className="flex space-x-2">
-              <Button className="flex-1">
+              <Button className="flex-1 bg-gray-800 hover:bg-black">
                 Generar Factura
               </Button>
               <Button variant="outline">
@@ -144,7 +144,7 @@ const BillingModal = ({ open, onOpenChange }: BillingModalProps) => {
             <h3 className="font-semibold">Facturas Recientes</h3>
             <div className="space-y-3">
               {recentInvoices.map((invoice, index) => (
-                <div key={index} className="border rounded-lg p-4">
+                <div key={index} className="border border-gray-200 rounded-lg p-4">
                   <div className="flex justify-between items-start">
                     <div className="space-y-1">
                       <div className="flex items-center space-x-2">
@@ -153,7 +153,7 @@ const BillingModal = ({ open, onOpenChange }: BillingModalProps) => {
                           {invoice.status === 'pagada' ? 'Pagada' : 'Pendiente'}
                         </span>
                       </div>
-                      <p className="text-sm text-slate-600">
+                      <p className="text-sm text-gray-600">
                         {invoice.date} • {invoice.client} • {invoice.pet}
                       </p>
                       <p className="text-sm">{invoice.service}</p>
@@ -180,20 +180,20 @@ const BillingModal = ({ open, onOpenChange }: BillingModalProps) => {
           </div>
 
           {/* Resumen financiero */}
-          <div className="bg-slate-50 p-4 rounded-lg">
+          <div className="bg-gray-50 p-4 rounded-lg">
             <h3 className="font-semibold mb-4">Resumen del Mes</h3>
             <div className="grid grid-cols-3 gap-4">
               <div className="text-center">
-                <p className="text-2xl font-bold text-green-600">$2,450</p>
-                <p className="text-sm text-slate-600">Ingresos</p>
+                <p className="text-2xl font-bold text-gray-800">$2,450</p>
+                <p className="text-sm text-gray-600">Ingresos</p>
               </div>
               <div className="text-center">
-                <p className="text-2xl font-bold text-blue-600">45</p>
-                <p className="text-sm text-slate-600">Facturas</p>
+                <p className="text-2xl font-bold text-gray-700">45</p>
+                <p className="text-sm text-gray-600">Facturas</p>
               </div>
               <div className="text-center">
-                <p className="text-2xl font-bold text-orange-600">$320</p>
-                <p className="text-sm text-slate-600">Pendientes</p>
+                <p className="text-2xl font-bold text-gray-600">$320</p>
+                <p className="text-sm text-gray-600">Pendientes</p>
               </div>
             </div>
           </div>
@@ -203,7 +203,7 @@ const BillingModal = ({ open, onOpenChange }: BillingModalProps) => {
           <Button variant="outline" onClick={() => onOpenChange(false)}>
             Cerrar
           </Button>
-          <Button>
+          <Button className="bg-gray-800 hover:bg-black">
             Exportar Reporte
           </Button>
         </div>

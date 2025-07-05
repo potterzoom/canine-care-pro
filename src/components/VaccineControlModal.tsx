@@ -39,22 +39,22 @@ const VaccineControlModal = ({ open, onOpenChange }: VaccineControlModalProps) =
   const getStatusIcon = (status: string) => {
     switch (status) {
       case 'aplicada':
-        return <CheckCircle className="w-4 h-4 text-green-600" />;
+        return <CheckCircle className="w-4 h-4 text-gray-700" />;
       case 'vencida':
-        return <AlertTriangle className="w-4 h-4 text-red-600" />;
+        return <AlertTriangle className="w-4 h-4 text-gray-800" />;
       default:
-        return <Calendar className="w-4 h-4 text-orange-600" />;
+        return <Calendar className="w-4 h-4 text-gray-600" />;
     }
   };
 
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'aplicada':
-        return 'bg-green-50 border-green-200 text-green-800';
+        return 'bg-gray-100 border-gray-300 text-gray-800';
       case 'vencida':
-        return 'bg-red-50 border-red-200 text-red-800';
+        return 'bg-gray-200 border-gray-400 text-gray-900';
       default:
-        return 'bg-orange-50 border-orange-200 text-orange-800';
+        return 'bg-gray-50 border-gray-200 text-gray-700';
     }
   };
 
@@ -77,7 +77,7 @@ const VaccineControlModal = ({ open, onOpenChange }: VaccineControlModalProps) =
             </div>
             <div>
               <Label htmlFor="filterStatus">Estado</Label>
-              <select id="filterStatus" className="w-full p-2 border rounded-md">
+              <select id="filterStatus" className="w-full p-2 border border-gray-300 rounded-md bg-white">
                 <option value="">Todos</option>
                 <option value="pendiente">Pendientes</option>
                 <option value="vencida">Vencidas</option>
@@ -85,7 +85,7 @@ const VaccineControlModal = ({ open, onOpenChange }: VaccineControlModalProps) =
               </select>
             </div>
             <div className="flex items-end">
-              <Button>Filtrar</Button>
+              <Button className="bg-gray-800 hover:bg-black">Filtrar</Button>
             </div>
           </div>
 
@@ -111,7 +111,7 @@ const VaccineControlModal = ({ open, onOpenChange }: VaccineControlModalProps) =
                     </div>
                     <div className="flex space-x-2">
                       {item.status === 'pendiente' && (
-                        <Button size="sm" className="bg-green-600 hover:bg-green-700">
+                        <Button size="sm" className="bg-gray-700 hover:bg-gray-800">
                           Marcar Aplicada
                         </Button>
                       )}
@@ -126,12 +126,12 @@ const VaccineControlModal = ({ open, onOpenChange }: VaccineControlModalProps) =
           </div>
 
           {/* Registrar nueva vacuna */}
-          <div className="bg-slate-50 p-4 rounded-lg space-y-4">
+          <div className="bg-gray-50 p-4 rounded-lg space-y-4">
             <h3 className="font-semibold">Registrar Nueva Vacuna</h3>
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <Label htmlFor="patientSelect">Paciente</Label>
-                <select id="patientSelect" className="w-full p-2 border rounded-md">
+                <select id="patientSelect" className="w-full p-2 border border-gray-300 rounded-md bg-white">
                   <option value="">Seleccionar paciente...</option>
                   <option value="max">Max</option>
                   <option value="luna">Luna</option>
@@ -140,7 +140,7 @@ const VaccineControlModal = ({ open, onOpenChange }: VaccineControlModalProps) =
               </div>
               <div>
                 <Label htmlFor="vaccineType">Tipo de Vacuna</Label>
-                <select id="vaccineType" className="w-full p-2 border rounded-md">
+                <select id="vaccineType" className="w-full p-2 border border-gray-300 rounded-md bg-white">
                   <option value="">Seleccionar...</option>
                   <option value="rabies">Antirrábica</option>
                   <option value="dhpp">Múltiple (DHPP)</option>
@@ -162,12 +162,12 @@ const VaccineControlModal = ({ open, onOpenChange }: VaccineControlModalProps) =
               <Label htmlFor="vaccineNotes">Notas</Label>
               <textarea 
                 id="vaccineNotes" 
-                className="w-full p-2 border rounded-md" 
+                className="w-full p-2 border border-gray-300 rounded-md bg-white" 
                 rows={2}
                 placeholder="Observaciones sobre la vacuna..."
               />
             </div>
-            <Button className="w-full">
+            <Button className="w-full bg-gray-800 hover:bg-black">
               Registrar Vacuna
             </Button>
           </div>
@@ -177,7 +177,7 @@ const VaccineControlModal = ({ open, onOpenChange }: VaccineControlModalProps) =
           <Button variant="outline" onClick={() => onOpenChange(false)}>
             Cerrar
           </Button>
-          <Button>
+          <Button className="bg-gray-800 hover:bg-black">
             Exportar Calendario
           </Button>
         </div>

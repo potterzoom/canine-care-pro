@@ -50,11 +50,11 @@ const ConfigModal = ({ open, onOpenChange }: ConfigModalProps) => {
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <Label htmlFor="stockAlerts">Alertas de stock</Label>
-                <input type="checkbox" id="stockAlerts" defaultChecked className="rounded" />
+                <input type="checkbox" id="stockAlerts" defaultChecked className="rounded border-gray-300" />
               </div>
               <div className="flex items-center justify-between">
                 <Label htmlFor="appointmentReminders">Recordatorios de citas</Label>
-                <input type="checkbox" id="appointmentReminders" defaultChecked className="rounded" />
+                <input type="checkbox" id="appointmentReminders" defaultChecked className="rounded border-gray-300" />
               </div>
             </div>
           </div>
@@ -82,7 +82,7 @@ const ConfigModal = ({ open, onOpenChange }: ConfigModalProps) => {
           <Button variant="outline" onClick={() => onOpenChange(false)}>
             Cancelar
           </Button>
-          <Button>
+          <Button className="bg-gray-800 hover:bg-black">
             Guardar
           </Button>
         </div>

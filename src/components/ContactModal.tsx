@@ -35,12 +35,12 @@ const ContactModal = ({ open, onOpenChange, contactName = "Juan Pérez", contact
         
         <div className="space-y-6">
           {/* Información del contacto */}
-          <div className="bg-slate-50 p-4 rounded-lg">
+          <div className="bg-gray-50 p-4 rounded-lg">
             <div className="flex items-center space-x-3 mb-3">
-              <User className="w-8 h-8 bg-green-100 text-green-600 rounded-full p-2" />
+              <User className="w-8 h-8 bg-gray-200 text-gray-600 rounded-full p-2" />
               <div>
                 <p className="font-medium">{contactName}</p>
-                <p className="text-sm text-slate-600">{contactPhone}</p>
+                <p className="text-sm text-gray-600">{contactPhone}</p>
               </div>
             </div>
           </div>
@@ -49,7 +49,7 @@ const ContactModal = ({ open, onOpenChange, contactName = "Juan Pérez", contact
           <div className="space-y-3">
             <Button 
               onClick={handleCall} 
-              className="w-full flex items-center justify-center space-x-2 bg-blue-500 hover:bg-blue-600"
+              className="w-full flex items-center justify-center space-x-2 bg-gray-700 hover:bg-gray-800"
             >
               <Phone className="w-4 h-4" />
               <span>Llamar Ahora</span>
@@ -57,7 +57,7 @@ const ContactModal = ({ open, onOpenChange, contactName = "Juan Pérez", contact
             
             <Button 
               onClick={handleWhatsApp}
-              className="w-full flex items-center justify-center space-x-2 bg-green-500 hover:bg-green-600"
+              className="w-full flex items-center justify-center space-x-2 bg-gray-800 hover:bg-black"
             >
               <MessageSquare className="w-4 h-4" />
               <span>Enviar WhatsApp</span>
@@ -69,7 +69,7 @@ const ContactModal = ({ open, onOpenChange, contactName = "Juan Pérez", contact
             <Label htmlFor="customMessage">Mensaje Personalizado</Label>
             <textarea 
               id="customMessage"
-              className="w-full p-2 border rounded-md" 
+              className="w-full p-2 border border-gray-300 rounded-md bg-white" 
               rows={3}
               placeholder="Escribir mensaje personalizado..."
               defaultValue={`Hola ${contactName}, me comunico desde VetSoft respecto a su mascota.`}
@@ -81,7 +81,7 @@ const ContactModal = ({ open, onOpenChange, contactName = "Juan Pérez", contact
           <Button variant="outline" onClick={() => onOpenChange(false)}>
             Cerrar
           </Button>
-          <Button>
+          <Button className="bg-gray-800 hover:bg-black">
             Enviar Mensaje
           </Button>
         </div>

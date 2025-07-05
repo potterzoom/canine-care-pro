@@ -31,7 +31,7 @@ const NewMedicalHistoryModal = ({ open, onOpenChange }: NewMedicalHistoryModalPr
             </div>
             <div>
               <Label htmlFor="species">Especie</Label>
-              <select id="species" className="w-full p-2 border rounded-md">
+              <select id="species" className="w-full p-2 border border-gray-300 rounded-md bg-white">
                 <option value="">Seleccionar...</option>
                 <option value="perro">Perro</option>
                 <option value="gato">Gato</option>
@@ -59,7 +59,7 @@ const NewMedicalHistoryModal = ({ open, onOpenChange }: NewMedicalHistoryModalPr
             </div>
             <div>
               <Label htmlFor="gender">Sexo</Label>
-              <select id="gender" className="w-full p-2 border rounded-md">
+              <select id="gender" className="w-full p-2 border border-gray-300 rounded-md bg-white">
                 <option value="">Seleccionar...</option>
                 <option value="macho">Macho</option>
                 <option value="hembra">Hembra</option>
@@ -68,7 +68,7 @@ const NewMedicalHistoryModal = ({ open, onOpenChange }: NewMedicalHistoryModalPr
           </div>
 
           {/* Información del dueño */}
-          <div className="bg-slate-50 p-4 rounded-lg space-y-4">
+          <div className="bg-gray-50 p-4 rounded-lg space-y-4">
             <h3 className="font-semibold">Información del Dueño</h3>
             <div className="grid grid-cols-2 gap-4">
               <div>
@@ -96,7 +96,7 @@ const NewMedicalHistoryModal = ({ open, onOpenChange }: NewMedicalHistoryModalPr
               <Label htmlFor="allergies">Alergias Conocidas</Label>
               <textarea 
                 id="allergies" 
-                className="w-full p-2 border rounded-md" 
+                className="w-full p-2 border border-gray-300 rounded-md bg-white" 
                 rows={2}
                 placeholder="Describir alergias si las tiene..."
               />
@@ -106,7 +106,7 @@ const NewMedicalHistoryModal = ({ open, onOpenChange }: NewMedicalHistoryModalPr
               <Label htmlFor="medicalHistory">Historial Médico Previo</Label>
               <textarea 
                 id="medicalHistory" 
-                className="w-full p-2 border rounded-md" 
+                className="w-full p-2 border border-gray-300 rounded-md bg-white" 
                 rows={3}
                 placeholder="Cirugías, enfermedades previas, tratamientos..."
               />
@@ -116,7 +116,7 @@ const NewMedicalHistoryModal = ({ open, onOpenChange }: NewMedicalHistoryModalPr
               <Label htmlFor="currentMedication">Medicación Actual</Label>
               <textarea 
                 id="currentMedication" 
-                className="w-full p-2 border rounded-md" 
+                className="w-full p-2 border border-gray-300 rounded-md bg-white" 
                 rows={2}
                 placeholder="Medicamentos que está tomando actualmente..."
               />
@@ -124,9 +124,9 @@ const NewMedicalHistoryModal = ({ open, onOpenChange }: NewMedicalHistoryModalPr
           </div>
 
           {/* Subir archivos */}
-          <div className="border-2 border-dashed border-slate-300 rounded-lg p-6 text-center">
-            <Upload className="w-8 h-8 mx-auto mb-2 text-slate-400" />
-            <p className="text-sm text-slate-600 mb-2">Subir documentos o imágenes</p>
+          <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center bg-gray-50">
+            <Upload className="w-8 h-8 mx-auto mb-2 text-gray-400" />
+            <p className="text-sm text-gray-600 mb-2">Subir documentos o imágenes</p>
             <Button variant="outline" size="sm">
               Seleccionar Archivos
             </Button>
@@ -137,7 +137,7 @@ const NewMedicalHistoryModal = ({ open, onOpenChange }: NewMedicalHistoryModalPr
           <Button variant="outline" onClick={() => onOpenChange(false)}>
             Cancelar
           </Button>
-          <Button>
+          <Button className="bg-gray-800 hover:bg-black">
             Crear Historia Clínica
           </Button>
         </div>

@@ -32,11 +32,11 @@ const TelemedicineModal = ({ open, onOpenChange }: TelemedicineModalProps) => {
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'en-curso':
-        return 'bg-green-100 text-green-800';
+        return 'bg-gray-200 text-gray-800';
       case 'programada':
-        return 'bg-blue-100 text-blue-800';
+        return 'bg-gray-100 text-gray-700';
       default:
-        return 'bg-slate-100 text-slate-800';
+        return 'bg-gray-50 text-gray-600';
     }
   };
 
@@ -53,11 +53,11 @@ const TelemedicineModal = ({ open, onOpenChange }: TelemedicineModalProps) => {
         <div className="space-y-6">
           {/* Acciones rápidas */}
           <div className="grid grid-cols-2 gap-4">
-            <Button className="h-20 flex flex-col items-center justify-center space-y-2 bg-green-600 hover:bg-green-700">
+            <Button className="h-20 flex flex-col items-center justify-center space-y-2 bg-gray-700 hover:bg-gray-800">
               <Video className="w-6 h-6" />
               <span>Iniciar Videollamada</span>
             </Button>
-            <Button className="h-20 flex flex-col items-center justify-center space-y-2 bg-blue-600 hover:bg-blue-700">
+            <Button className="h-20 flex flex-col items-center justify-center space-y-2 bg-gray-800 hover:bg-black">
               <Calendar className="w-6 h-6" />
               <span>Programar Consulta</span>
             </Button>
@@ -68,7 +68,7 @@ const TelemedicineModal = ({ open, onOpenChange }: TelemedicineModalProps) => {
             <h3 className="font-semibold">Consultas de Hoy</h3>
             <div className="space-y-3">
               {scheduledCalls.map((call, index) => (
-                <div key={index} className="border rounded-lg p-4">
+                <div key={index} className="border border-gray-200 rounded-lg p-4">
                   <div className="flex justify-between items-start">
                     <div className="space-y-2">
                       <div className="flex items-center space-x-2">
@@ -81,11 +81,11 @@ const TelemedicineModal = ({ open, onOpenChange }: TelemedicineModalProps) => {
                       <p className="text-sm">
                         <strong>{call.client}</strong> - {call.pet}
                       </p>
-                      <p className="text-sm text-slate-600">{call.type}</p>
+                      <p className="text-sm text-gray-600">{call.type}</p>
                     </div>
                     <div className="flex space-x-2">
                       {call.status === 'en-curso' ? (
-                        <Button size="sm" className="bg-green-600 hover:bg-green-700">
+                        <Button size="sm" className="bg-gray-700 hover:bg-gray-800">
                           <Video className="w-4 h-4 mr-1" />
                           Unirse
                         </Button>
@@ -109,12 +109,12 @@ const TelemedicineModal = ({ open, onOpenChange }: TelemedicineModalProps) => {
           </div>
 
           {/* Programar nueva consulta */}
-          <div className="bg-slate-50 p-4 rounded-lg space-y-4">
+          <div className="bg-gray-50 p-4 rounded-lg space-y-4">
             <h3 className="font-semibold">Programar Nueva Teleconsulta</h3>
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <Label htmlFor="clientSelect">Cliente</Label>
-                <select id="clientSelect" className="w-full p-2 border rounded-md">
+                <select id="clientSelect" className="w-full p-2 border border-gray-300 rounded-md bg-white">
                   <option value="">Seleccionar cliente...</option>
                   <option value="juan">Juan Pérez</option>
                   <option value="maria">María García</option>
@@ -123,7 +123,7 @@ const TelemedicineModal = ({ open, onOpenChange }: TelemedicineModalProps) => {
               </div>
               <div>
                 <Label htmlFor="consultType">Tipo de Consulta</Label>
-                <select id="consultType" className="w-full p-2 border rounded-md">
+                <select id="consultType" className="w-full p-2 border border-gray-300 rounded-md bg-white">
                   <option value="">Seleccionar...</option>
                   <option value="seguimiento">Seguimiento</option>
                   <option value="comportamiento">Comportamiento</option>
@@ -148,32 +148,32 @@ const TelemedicineModal = ({ open, onOpenChange }: TelemedicineModalProps) => {
               <Label htmlFor="consultNotes">Motivo de la Consulta</Label>
               <textarea 
                 id="consultNotes" 
-                className="w-full p-2 border rounded-md" 
+                className="w-full p-2 border border-gray-300 rounded-md bg-white" 
                 rows={3}
                 placeholder="Describir el motivo de la teleconsulta..."
               />
             </div>
             
-            <Button className="w-full">
+            <Button className="w-full bg-gray-800 hover:bg-black">
               Programar Teleconsulta
             </Button>
           </div>
 
           {/* Estadísticas */}
-          <div className="bg-slate-50 p-4 rounded-lg">
+          <div className="bg-gray-50 p-4 rounded-lg">
             <h3 className="font-semibold mb-4">Estadísticas del Mes</h3>
             <div className="grid grid-cols-3 gap-4">
               <div className="text-center">
-                <p className="text-2xl font-bold text-blue-600">24</p>
-                <p className="text-sm text-slate-600">Teleconsultas</p>
+                <p className="text-2xl font-bold text-gray-800">24</p>
+                <p className="text-sm text-gray-600">Teleconsultas</p>
               </div>
               <div className="text-center">
-                <p className="text-2xl font-bold text-green-600">95%</p>
-                <p className="text-sm text-slate-600">Satisfacción</p>
+                <p className="text-2xl font-bold text-gray-700">95%</p>
+                <p className="text-sm text-gray-600">Satisfacción</p>
               </div>
               <div className="text-center">
-                <p className="text-2xl font-bold text-purple-600">48min</p>
-                <p className="text-sm text-slate-600">Duración Prom.</p>
+                <p className="text-2xl font-bold text-gray-600">48min</p>
+                <p className="text-sm text-gray-600">Duración Prom.</p>
               </div>
             </div>
           </div>
@@ -183,7 +183,7 @@ const TelemedicineModal = ({ open, onOpenChange }: TelemedicineModalProps) => {
           <Button variant="outline" onClick={() => onOpenChange(false)}>
             Cerrar
           </Button>
-          <Button>
+          <Button className="bg-gray-800 hover:bg-black">
             Ver Historial
           </Button>
         </div>

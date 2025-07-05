@@ -50,7 +50,7 @@ const PatientHistoryModal = ({ open, onOpenChange, patientName = "Max" }: Patien
         
         <div className="space-y-6">
           {/* Información del paciente */}
-          <div className="bg-slate-50 p-4 rounded-lg">
+          <div className="bg-gray-50 p-4 rounded-lg">
             <h3 className="font-semibold mb-2 flex items-center space-x-2">
               <User className="w-4 h-4" />
               <span>Información del Paciente</span>
@@ -73,11 +73,11 @@ const PatientHistoryModal = ({ open, onOpenChange, patientName = "Max" }: Patien
             </h3>
             
             {historyEntries.map((entry, index) => (
-              <div key={index} className="border rounded-lg p-4 space-y-2">
+              <div key={index} className="border border-gray-200 rounded-lg p-4 space-y-2">
                 <div className="flex justify-between items-start">
                   <div className="space-y-1">
-                    <div className="font-medium text-green-600">{entry.type}</div>
-                    <div className="text-sm text-slate-600">{entry.date} • {entry.doctor}</div>
+                    <div className="font-medium text-gray-700">{entry.type}</div>
+                    <div className="text-sm text-gray-600">{entry.date} • {entry.doctor}</div>
                   </div>
                 </div>
                 
@@ -101,7 +101,7 @@ const PatientHistoryModal = ({ open, onOpenChange, patientName = "Max" }: Patien
           <Button variant="outline" onClick={() => onOpenChange(false)}>
             Cerrar
           </Button>
-          <Button>
+          <Button className="bg-gray-800 hover:bg-black">
             Imprimir Historia
           </Button>
         </div>

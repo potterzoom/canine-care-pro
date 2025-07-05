@@ -51,7 +51,7 @@ const NewAppointmentModal = ({ open, onOpenChange }: NewAppointmentModalProps) =
           
           <div>
             <Label htmlFor="appointmentType">Tipo de Consulta</Label>
-            <select id="appointmentType" className="w-full p-2 border rounded-md">
+            <select id="appointmentType" className="w-full p-2 border border-gray-300 rounded-md bg-white">
               <option value="">Seleccionar...</option>
               <option value="general">Consulta General</option>
               <option value="vaccination">Vacunación</option>
@@ -64,14 +64,14 @@ const NewAppointmentModal = ({ open, onOpenChange }: NewAppointmentModalProps) =
             <Label htmlFor="notes">Notas</Label>
             <textarea 
               id="notes" 
-              className="w-full p-2 border rounded-md" 
+              className="w-full p-2 border border-gray-300 rounded-md bg-white" 
               rows={3}
               placeholder="Observaciones adicionales..."
             />
           </div>
           
           <div className="flex items-center space-x-2">
-            <input type="checkbox" id="urgent" className="rounded" />
+            <input type="checkbox" id="urgent" className="rounded border-gray-300" />
             <Label htmlFor="urgent">Marcar como urgente</Label>
           </div>
         </div>
@@ -80,7 +80,7 @@ const NewAppointmentModal = ({ open, onOpenChange }: NewAppointmentModalProps) =
           <Button variant="outline" onClick={() => onOpenChange(false)}>
             Cancelar
           </Button>
-          <Button>
+          <Button className="bg-gray-800 hover:bg-black">
             Agendar Cita
           </Button>
         </div>
