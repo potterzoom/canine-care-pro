@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import Header from '../components/Header';
 import StatsCard from '../components/StatsCard';
@@ -15,7 +14,8 @@ import VaccineControlModal from '../components/VaccineControlModal';
 import BillingModal from '../components/BillingModal';
 import TelemedicineModal from '../components/TelemedicineModal';
 import ClientSearchModal from '../components/ClientSearchModal';
-import { Calendar, User, Bell, Plus, Settings, FileText, Phone, Syringe, Receipt, Video } from 'lucide-react';
+import StockModal from '../components/StockModal';
+import { Calendar, User, Bell, Plus, Settings, FileText, Phone, Syringe, Receipt, Video, Package } from 'lucide-react';
 
 const Index = () => {
   // Estados para controlar los modales
@@ -28,13 +28,13 @@ const Index = () => {
   const [vaccineControlOpen, setVaccineControlOpen] = useState(false);
   const [billingOpen, setBillingOpen] = useState(false);
   const [telemedicineOpen, setTelemedicineOpen] = useState(false);
+  const [stockOpen, setStockOpen] = useState(false);
   
   // Estados para el buscador de clientes
   const [clientSearchOpen, setClientSearchOpen] = useState(false);
   const [searchAction, setSearchAction] = useState<'history' | 'contact'>('history');
   const [selectedClient, setSelectedClient] = useState<any>(null);
 
-  // Datos de ejemplo
   const todayStats = [
     {
       title: "Ingresos Hoy",
@@ -205,6 +205,14 @@ const Index = () => {
           </button>
           
           <button 
+            onClick={() => setStockOpen(true)}
+            className="flex items-center space-x-2 px-4 py-2 bg-gray-700 hover:bg-gray-800 text-white rounded-lg transition-colors"
+          >
+            <Package className="w-4 h-4" />
+            <span>Stock</span>
+          </button>
+          
+          <button 
             onClick={() => setConfigOpen(true)}
             className="flex items-center space-x-2 px-4 py-2 bg-gray-900 hover:bg-black text-white rounded-lg transition-colors"
           >
@@ -350,6 +358,7 @@ const Index = () => {
       <VaccineControlModal open={vaccineControlOpen} onOpenChange={setVaccineControlOpen} />
       <BillingModal open={billingOpen} onOpenChange={setBillingOpen} />
       <TelemedicineModal open={telemedicineOpen} onOpenChange={setTelemedicineOpen} />
+      <StockModal open={stockOpen} onOpenChange={setStockOpen} />
       
       {/* Modal de búsqueda de clientes */}
       <ClientSearchModal
