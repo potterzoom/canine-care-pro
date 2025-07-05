@@ -15,7 +15,8 @@ import BillingModal from '../components/BillingModal';
 import TelemedicineModal from '../components/TelemedicineModal';
 import ClientSearchModal from '../components/ClientSearchModal';
 import StockModal from '../components/StockModal';
-import { Calendar, User, Bell, Plus, Settings, FileText, Phone, Syringe, Receipt, Video, Package } from 'lucide-react';
+import WhatsAppModal from '../components/WhatsAppModal';
+import { Calendar, User, Bell, Plus, Settings, FileText, Phone, Syringe, Receipt, Video, Package, MessageSquare } from 'lucide-react';
 
 const Index = () => {
   // Estados para controlar los modales
@@ -29,6 +30,7 @@ const Index = () => {
   const [billingOpen, setBillingOpen] = useState(false);
   const [telemedicineOpen, setTelemedicineOpen] = useState(false);
   const [stockOpen, setStockOpen] = useState(false);
+  const [whatsAppOpen, setWhatsAppOpen] = useState(false);
   
   // Estados para el buscador de clientes
   const [clientSearchOpen, setClientSearchOpen] = useState(false);
@@ -213,6 +215,14 @@ const Index = () => {
           </button>
           
           <button 
+            onClick={() => setWhatsAppOpen(true)}
+            className="flex items-center space-x-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors"
+          >
+            <MessageSquare className="w-4 h-4" />
+            <span>WhatsApp</span>
+          </button>
+          
+          <button 
             onClick={() => setConfigOpen(true)}
             className="flex items-center space-x-2 px-4 py-2 bg-gray-900 hover:bg-black text-white rounded-lg transition-colors"
           >
@@ -359,6 +369,7 @@ const Index = () => {
       <BillingModal open={billingOpen} onOpenChange={setBillingOpen} />
       <TelemedicineModal open={telemedicineOpen} onOpenChange={setTelemedicineOpen} />
       <StockModal open={stockOpen} onOpenChange={setStockOpen} />
+      <WhatsAppModal open={whatsAppOpen} onOpenChange={setWhatsAppOpen} />
       
       {/* Modal de búsqueda de clientes */}
       <ClientSearchModal
