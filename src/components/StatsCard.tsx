@@ -13,24 +13,24 @@ interface StatsCardProps {
 
 const StatsCard = ({ title, value, change, icon: Icon, trend, color }: StatsCardProps) => {
   const colorClasses = {
-    green: 'from-green-500 to-emerald-600',
-    blue: 'from-blue-500 to-blue-600',
-    purple: 'from-purple-500 to-purple-600',
-    orange: 'from-orange-500 to-orange-600'
+    green: 'from-gray-700 to-gray-900',
+    blue: 'from-gray-600 to-gray-800',
+    purple: 'from-gray-800 to-black',
+    orange: 'from-gray-500 to-gray-700'
   };
 
   const trendColors = {
-    up: 'text-green-600',
-    down: 'text-red-600',
-    neutral: 'text-slate-600'
+    up: 'text-gray-700',
+    down: 'text-gray-900',
+    neutral: 'text-gray-600'
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 animate-fade-in hover:shadow-md transition-shadow">
+    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 animate-fade-in hover:shadow-md transition-shadow">
       <div className="flex items-center justify-between">
         <div className="flex-1">
-          <p className="text-sm font-medium text-slate-600 mb-1">{title}</p>
-          <p className="text-2xl font-bold text-slate-800 mb-2">{value}</p>
+          <p className="text-sm font-medium text-gray-600 mb-1">{title}</p>
+          <p className="text-2xl font-bold text-gray-900 mb-2">{value}</p>
           <p className={`text-sm ${trendColors[trend]}`}>
             {change}
           </p>

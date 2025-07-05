@@ -20,9 +20,9 @@ const AppointmentCard = ({
   urgent = false 
 }: AppointmentCardProps) => {
   const statusColors = {
-    pending: 'bg-yellow-100 text-yellow-800 border-yellow-200',
-    confirmed: 'bg-blue-100 text-blue-800 border-blue-200',
-    completed: 'bg-green-100 text-green-800 border-green-200'
+    pending: 'bg-gray-100 text-gray-800 border-gray-200',
+    confirmed: 'bg-gray-200 text-gray-900 border-gray-300',
+    completed: 'bg-gray-800 text-white border-gray-900'
   };
 
   const statusLabels = {
@@ -32,13 +32,13 @@ const AppointmentCard = ({
   };
 
   return (
-    <div className={`bg-white rounded-lg border-l-4 ${urgent ? 'border-l-red-500' : 'border-l-green-500'} shadow-sm p-4 hover:shadow-md transition-shadow`}>
+    <div className={`bg-white rounded-lg border-l-4 ${urgent ? 'border-l-black' : 'border-l-gray-600'} shadow-sm p-4 hover:shadow-md transition-shadow`}>
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center space-x-2">
-          <Calendar className="w-4 h-4 text-slate-500" />
-          <span className="text-sm font-medium text-slate-800">{time}</span>
+          <Calendar className="w-4 h-4 text-gray-500" />
+          <span className="text-sm font-medium text-gray-900">{time}</span>
           {urgent && (
-            <span className="px-2 py-1 text-xs font-medium bg-red-100 text-red-800 rounded-full">
+            <span className="px-2 py-1 text-xs font-medium bg-black text-white rounded-full">
               URGENTE
             </span>
           )}
@@ -52,12 +52,12 @@ const AppointmentCard = ({
         <div className="flex items-center space-x-2">
           <span className="text-lg">🐕</span>
           <div>
-            <p className="font-medium text-slate-800">{petName}</p>
-            <p className="text-sm text-slate-600">{type}</p>
+            <p className="font-medium text-gray-900">{petName}</p>
+            <p className="text-sm text-gray-600">{type}</p>
           </div>
         </div>
         
-        <div className="flex items-center space-x-2 text-sm text-slate-600">
+        <div className="flex items-center space-x-2 text-sm text-gray-600">
           <User className="w-4 h-4" />
           <span>{ownerName}</span>
         </div>

@@ -58,7 +58,7 @@ const ClientSearchModal = ({ open, onOpenChange, onClientSelect, title }: Client
         <div className="space-y-4">
           {/* Buscador */}
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
             <Input
               placeholder="Buscar por nombre, mascota o teléfono..."
               value={searchTerm}
@@ -74,16 +74,16 @@ const ClientSearchModal = ({ open, onOpenChange, onClientSelect, title }: Client
                 <div
                   key={client.id}
                   onClick={() => handleSelectClient(client)}
-                  className="p-3 border rounded-lg hover:bg-slate-50 cursor-pointer transition-colors"
+                  className="p-3 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors"
                 >
                   <div className="flex items-center space-x-3">
-                    <User className="w-8 h-8 bg-green-100 text-green-600 rounded-full p-2" />
+                    <User className="w-8 h-8 bg-gray-100 text-gray-600 rounded-full p-2" />
                     <div className="flex-1">
-                      <p className="font-medium">{client.name}</p>
-                      <p className="text-sm text-slate-600">
+                      <p className="font-medium text-gray-900">{client.name}</p>
+                      <p className="text-sm text-gray-600">
                         {client.petName} • {client.petSpecies}
                       </p>
-                      <p className="text-sm text-slate-500 flex items-center space-x-1">
+                      <p className="text-sm text-gray-500 flex items-center space-x-1">
                         <Phone className="w-3 h-3" />
                         <span>{client.phone}</span>
                       </p>
@@ -92,8 +92,8 @@ const ClientSearchModal = ({ open, onOpenChange, onClientSelect, title }: Client
                 </div>
               ))
             ) : (
-              <div className="text-center py-8 text-slate-500">
-                <Search className="w-12 h-12 mx-auto mb-2 text-slate-400" />
+              <div className="text-center py-8 text-gray-500">
+                <Search className="w-12 h-12 mx-auto mb-2 text-gray-400" />
                 <p>No se encontraron clientes</p>
                 <p className="text-sm">Intenta con otro término de búsqueda</p>
               </div>

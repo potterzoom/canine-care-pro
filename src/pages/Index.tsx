@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import Header from '../components/Header';
 import StatsCard from '../components/StatsCard';
@@ -155,16 +156,16 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-gray-50">
       <Header />
       
       <main className="max-w-7xl mx-auto px-6 py-8">
         {/* Bienvenida */}
         <div className="mb-8 animate-slide-up">
-          <h2 className="text-2xl font-bold text-slate-800 mb-2">
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">
             Bienvenida, Dra. María 👋
           </h2>
-          <p className="text-slate-600">
+          <p className="text-gray-600">
             Aquí tienes un resumen de tu día. Tienes 8 citas programadas.
           </p>
         </div>
@@ -173,7 +174,7 @@ const Index = () => {
         <div className="mb-8 flex flex-wrap gap-4">
           <button 
             onClick={() => setAlertsOpen(true)}
-            className="flex items-center space-x-2 px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-lg transition-colors"
+            className="flex items-center space-x-2 px-4 py-2 bg-gray-800 hover:bg-black text-white rounded-lg transition-colors"
           >
             <Bell className="w-4 h-4" />
             <span>Ver Alertas</span>
@@ -181,7 +182,7 @@ const Index = () => {
           
           <button 
             onClick={() => setNewAppointmentOpen(true)}
-            className="flex items-center space-x-2 px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg transition-colors"
+            className="flex items-center space-x-2 px-4 py-2 bg-gray-700 hover:bg-gray-800 text-white rounded-lg transition-colors"
           >
             <Plus className="w-4 h-4" />
             <span>Nueva Cita</span>
@@ -189,7 +190,7 @@ const Index = () => {
           
           <button 
             onClick={handleSearchHistory}
-            className="flex items-center space-x-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors"
+            className="flex items-center space-x-2 px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg transition-colors"
           >
             <FileText className="w-4 h-4" />
             <span>Ver Historia</span>
@@ -197,7 +198,7 @@ const Index = () => {
           
           <button 
             onClick={handleSearchContact}
-            className="flex items-center space-x-2 px-4 py-2 bg-purple-500 hover:bg-purple-600 text-white rounded-lg transition-colors"
+            className="flex items-center space-x-2 px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg transition-colors"
           >
             <Phone className="w-4 h-4" />
             <span>Contactar</span>
@@ -205,7 +206,7 @@ const Index = () => {
           
           <button 
             onClick={() => setConfigOpen(true)}
-            className="flex items-center space-x-2 px-4 py-2 bg-slate-500 hover:bg-slate-600 text-white rounded-lg transition-colors"
+            className="flex items-center space-x-2 px-4 py-2 bg-gray-900 hover:bg-black text-white rounded-lg transition-colors"
           >
             <Settings className="w-4 h-4" />
             <span>Configuración</span>
@@ -224,12 +225,12 @@ const Index = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Citas de hoy */}
           <div className="lg:col-span-2 space-y-6">
-            <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
               <div className="flex items-center justify-between mb-6">
-                <h3 className="text-lg font-semibold text-slate-800">Citas de Hoy</h3>
+                <h3 className="text-lg font-semibold text-gray-900">Citas de Hoy</h3>
                 <button 
                   onClick={() => setNewAppointmentOpen(true)}
-                  className="flex items-center space-x-2 px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg transition-colors"
+                  className="flex items-center space-x-2 px-4 py-2 bg-gray-800 hover:bg-black text-white rounded-lg transition-colors"
                 >
                   <Plus className="w-4 h-4" />
                   <span>Nueva Cita</span>
@@ -244,8 +245,8 @@ const Index = () => {
             </div>
 
             {/* Pacientes Recientes */}
-            <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-              <h3 className="text-lg font-semibold text-slate-800 mb-6">Pacientes Recientes</h3>
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+              <h3 className="text-lg font-semibold text-gray-900 mb-6">Pacientes Recientes</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {recentPatients.map((patient, index) => (
                   <PatientCard 
@@ -262,10 +263,10 @@ const Index = () => {
           {/* Panel lateral */}
           <div className="space-y-6">
             {/* Alertas de Stock */}
-            <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
               <div className="flex items-center justify-between mb-6">
-                <h3 className="text-lg font-semibold text-slate-800">Alertas de Stock</h3>
-                <span className="px-2 py-1 bg-red-100 text-red-800 text-xs font-medium rounded-full">
+                <h3 className="text-lg font-semibold text-gray-900">Alertas de Stock</h3>
+                <span className="px-2 py-1 bg-gray-100 text-gray-800 text-xs font-medium rounded-full">
                   {lowStockItems.length} alertas
                 </span>
               </div>
@@ -278,50 +279,50 @@ const Index = () => {
             </div>
 
             {/* Accesos Rápidos */}
-            <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-              <h3 className="text-lg font-semibold text-slate-800 mb-6">Accesos Rápidos</h3>
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+              <h3 className="text-lg font-semibold text-gray-900 mb-6">Accesos Rápidos</h3>
               <div className="space-y-3">
                 <button 
                   onClick={() => setNewMedicalHistoryOpen(true)}
-                  className="w-full flex items-center space-x-3 p-3 text-left hover:bg-slate-50 rounded-lg transition-colors"
+                  className="w-full flex items-center space-x-3 p-3 text-left hover:bg-gray-50 rounded-lg transition-colors"
                 >
                   <span className="text-xl">📋</span>
                   <div>
-                    <p className="font-medium text-slate-800">Nueva Historia Clínica</p>
-                    <p className="text-sm text-slate-500">Registrar nuevo paciente</p>
+                    <p className="font-medium text-gray-900">Nueva Historia Clínica</p>
+                    <p className="text-sm text-gray-500">Registrar nuevo paciente</p>
                   </div>
                 </button>
                 
                 <button 
                   onClick={() => setVaccineControlOpen(true)}
-                  className="w-full flex items-center space-x-3 p-3 text-left hover:bg-slate-50 rounded-lg transition-colors"
+                  className="w-full flex items-center space-x-3 p-3 text-left hover:bg-gray-50 rounded-lg transition-colors"
                 >
                   <span className="text-xl">💉</span>
                   <div>
-                    <p className="font-medium text-slate-800">Control de Vacunas</p>
-                    <p className="text-sm text-slate-500">Revisar calendario</p>
+                    <p className="font-medium text-gray-900">Control de Vacunas</p>
+                    <p className="text-sm text-gray-500">Revisar calendario</p>
                   </div>
                 </button>
                 
                 <button 
                   onClick={() => setBillingOpen(true)}
-                  className="w-full flex items-center space-x-3 p-3 text-left hover:bg-slate-50 rounded-lg transition-colors"
+                  className="w-full flex items-center space-x-3 p-3 text-left hover:bg-gray-50 rounded-lg transition-colors"
                 >
                   <span className="text-xl">📄</span>
                   <div>
-                    <p className="font-medium text-slate-800">Facturación</p>
-                    <p className="text-sm text-slate-500">Generar facturas</p>
+                    <p className="font-medium text-gray-900">Facturación</p>
+                    <p className="text-sm text-gray-500">Generar facturas</p>
                   </div>
                 </button>
                 
                 <button 
                   onClick={() => setTelemedicineOpen(true)}
-                  className="w-full flex items-center space-x-3 p-3 text-left hover:bg-slate-50 rounded-lg transition-colors"
+                  className="w-full flex items-center space-x-3 p-3 text-left hover:bg-gray-50 rounded-lg transition-colors"
                 >
                   <span className="text-xl">📱</span>
                   <div>
-                    <p className="font-medium text-slate-800">Teleconsulta</p>
-                    <p className="text-sm text-slate-500">Consultas remotas</p>
+                    <p className="font-medium text-gray-900">Teleconsulta</p>
+                    <p className="text-sm text-gray-500">Consultas remotas</p>
                   </div>
                 </button>
               </div>
