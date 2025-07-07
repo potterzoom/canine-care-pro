@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -19,7 +18,6 @@ import ClientSearchModal from '../components/ClientSearchModal';
 import StockModal from '../components/StockModal';
 import WhatsAppModal from '../components/WhatsAppModal';
 import UserManagementModal from '../components/UserManagementModal';
-import ImprovementSuggestions from '../components/ImprovementSuggestions';
 import { Calendar, User, Bell, Plus, Settings, FileText, Phone, Syringe, Receipt, Video, Package, MessageSquare } from 'lucide-react';
 
 const Index = () => {
@@ -286,9 +284,6 @@ const Index = () => {
                 ))}
               </div>
             </div>
-
-            {/* Sugerencias de Mejora */}
-            <ImprovementSuggestions />
           </div>
 
           {/* Panel lateral */}
