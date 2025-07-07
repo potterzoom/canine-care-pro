@@ -18,7 +18,8 @@ import ClientSearchModal from '../components/ClientSearchModal';
 import StockModal from '../components/StockModal';
 import WhatsAppModal from '../components/WhatsAppModal';
 import UserManagementModal from '../components/UserManagementModal';
-import { Calendar, User, Bell, Plus, Settings, FileText, Phone, Syringe, Receipt, Video, Package, MessageSquare } from 'lucide-react';
+import ServicesModal from '../components/ServicesModal';
+import { Calendar, User, Bell, Plus, Settings, FileText, Phone, Syringe, Receipt, Video, Package, MessageSquare, Stethoscope } from 'lucide-react';
 
 const Index = () => {
   // Estados para controlar los modales
@@ -34,6 +35,7 @@ const Index = () => {
   const [stockOpen, setStockOpen] = useState(false);
   const [whatsAppOpen, setWhatsAppOpen] = useState(false);
   const [userManagementOpen, setUserManagementOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
   
   // Estados para el buscador de clientes
   const [clientSearchOpen, setClientSearchOpen] = useState(false);
@@ -215,6 +217,14 @@ const Index = () => {
           </button>
           
           <button 
+            onClick={() => setServicesOpen(true)}
+            className="flex items-center space-x-2 px-4 py-2 bg-gray-800 hover:bg-black text-white rounded-lg transition-colors"
+          >
+            <Stethoscope className="w-4 h-4" />
+            <span>Servicios</span>
+          </button>
+          
+          <button 
             onClick={() => setStockOpen(true)}
             className="flex items-center space-x-2 px-4 py-2 bg-gray-700 hover:bg-gray-800 text-white rounded-lg transition-colors"
           >
@@ -381,6 +391,7 @@ const Index = () => {
       <StockModal open={stockOpen} onOpenChange={setStockOpen} />
       <WhatsAppModal open={whatsAppOpen} onOpenChange={setWhatsAppOpen} />
       <UserManagementModal open={userManagementOpen} onOpenChange={setUserManagementOpen} />
+      <ServicesModal open={servicesOpen} onOpenChange={setServicesOpen} />
       
       {/* Modal de búsqueda de clientes */}
       <ClientSearchModal
