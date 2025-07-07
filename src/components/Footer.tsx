@@ -143,86 +143,8 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Sección de Recomendaciones de Mejora */}
-        <div className="border-t border-gray-800 mt-8 pt-8">
-          <div className="mb-6">
-            <h4 className="text-lg font-semibold mb-4 flex items-center">
-              <BarChart3 className="w-5 h-5 mr-2" />
-              Recomendaciones de Mejora por Sección
-            </h4>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-sm">
-              <div className="bg-gray-800 rounded-lg p-4">
-                <h5 className="font-medium text-gray-200 mb-2 flex items-center">
-                  <BarChart3 className="w-4 h-4 mr-2" />
-                  Dashboard Principal
-                </h5>
-                <ul className="text-xs text-gray-400 space-y-1">
-                  <li>• Gráficos de tendencias avanzados</li>
-                  <li>• Notificaciones push inteligentes</li>
-                  <li>• Dashboard personalizable</li>
-                </ul>
-              </div>
-              <div className="bg-gray-800 rounded-lg p-4">
-                <h5 className="font-medium text-gray-200 mb-2 flex items-center">
-                  <Users className="w-4 h-4 mr-2" />
-                  Gestión de Pacientes
-                </h5>
-                <ul className="text-xs text-gray-400 space-y-1">
-                  <li>• Historiales médicos detallados</li>
-                  <li>• App móvil para propietarios</li>
-                  <li>• Integración con laboratorios</li>
-                </ul>
-              </div>
-              <div className="bg-gray-800 rounded-lg p-4">
-                <h5 className="font-medium text-gray-200 mb-2 flex items-center">
-                  <Package className="w-4 h-4 mr-2" />
-                  Inventario y Stock
-                </h5>
-                <ul className="text-xs text-gray-400 space-y-1">
-                  <li>• Predicción de demanda con IA</li>
-                  <li>• Pedidos automáticos inteligentes</li>
-                  <li>• Reportes de rotación avanzados</li>
-                </ul>
-              </div>
-              <div className="bg-gray-800 rounded-lg p-4">
-                <h5 className="font-medium text-gray-200 mb-2 flex items-center">
-                  <Mail className="w-4 h-4 mr-2" />
-                  Comunicación
-                </h5>
-                <ul className="text-xs text-gray-400 space-y-1">
-                  <li>• Campañas de email marketing</li>
-                  <li>• SMS recordatorios automáticos</li>
-                  <li>• WhatsApp IA mejorado</li>
-                </ul>
-              </div>
-              <div className="bg-gray-800 rounded-lg p-4">
-                <h5 className="font-medium text-gray-200 mb-2 flex items-center">
-                  <Shield className="w-4 h-4 mr-2" />
-                  Seguridad
-                </h5>
-                <ul className="text-xs text-gray-400 space-y-1">
-                  <li>• Autenticación de dos factores</li>
-                  <li>• Respaldos automáticos diarios</li>
-                  <li>• Encriptación de datos médicos</li>
-                </ul>
-              </div>
-              <div className="bg-gray-800 rounded-lg p-4">
-                <h5 className="font-medium text-gray-200 mb-2 flex items-center">
-                  <BarChart3 className="w-4 h-4 mr-2" />
-                  Reportes
-                </h5>
-                <ul className="text-xs text-gray-400 space-y-1">
-                  <li>• Dashboard financiero avanzado</li>
-                  <li>• Métricas de satisfacción</li>
-                  <li>• KPIs de productividad</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-
         {/* Copyright y enlaces legales mejorados */}
-        <div className="border-t border-gray-800 pt-6">
+        <div className="border-t border-gray-800 pt-6 mt-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="text-center md:text-left">
               <p className="text-sm text-gray-400">
