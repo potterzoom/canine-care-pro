@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 import StatsCard from '../components/StatsCard';
 import AppointmentCard from '../components/AppointmentCard';
 import PatientCard from '../components/PatientCard';
@@ -158,10 +159,10 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 flex flex-col">
       <Header />
       
-      <main className="max-w-7xl mx-auto px-6 py-8">
+      <main className="flex-1 max-w-7xl mx-auto px-6 py-8">
         {/* Bienvenida */}
         <div className="mb-8 animate-slide-up">
           <h2 className="text-2xl font-bold text-gray-900 mb-2">
@@ -348,6 +349,8 @@ const Index = () => {
           </div>
         </div>
       </main>
+
+      <Footer />
 
       {/* Modales */}
       <AlertsModal open={alertsOpen} onOpenChange={setAlertsOpen} />
