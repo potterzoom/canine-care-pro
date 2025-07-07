@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -17,6 +18,8 @@ import TelemedicineModal from '../components/TelemedicineModal';
 import ClientSearchModal from '../components/ClientSearchModal';
 import StockModal from '../components/StockModal';
 import WhatsAppModal from '../components/WhatsAppModal';
+import UserManagementModal from '../components/UserManagementModal';
+import ImprovementSuggestions from '../components/ImprovementSuggestions';
 import { Calendar, User, Bell, Plus, Settings, FileText, Phone, Syringe, Receipt, Video, Package, MessageSquare } from 'lucide-react';
 
 const Index = () => {
@@ -32,6 +35,7 @@ const Index = () => {
   const [telemedicineOpen, setTelemedicineOpen] = useState(false);
   const [stockOpen, setStockOpen] = useState(false);
   const [whatsAppOpen, setWhatsAppOpen] = useState(false);
+  const [userManagementOpen, setUserManagementOpen] = useState(false);
   
   // Estados para el buscador de clientes
   const [clientSearchOpen, setClientSearchOpen] = useState(false);
@@ -160,7 +164,12 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
-      <Header />
+      <Header 
+        onAlertsClick={() => setAlertsOpen(true)}
+        onConfigClick={() => setConfigOpen(true)}
+        onWhatsAppClick={() => setWhatsAppOpen(true)}
+        onUserManagementClick={() => setUserManagementOpen(true)}
+      />
       
       <main className="flex-1 max-w-7xl mx-auto px-6 py-8">
         {/* Bienvenida */}
@@ -169,7 +178,7 @@ const Index = () => {
             Bienvenida, Dra. María 👋
           </h2>
           <p className="text-gray-600">
-            Aquí tienes un resumen de tu día. Tienes 8 citas programadas.
+            Tu asistente de IA está listo para ayudarte con alertas, inventario, comunicaciones y más. ¡Optimiza tu día con tecnología inteligente!
           </p>
         </div>
 
@@ -220,7 +229,7 @@ const Index = () => {
             className="flex items-center space-x-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors"
           >
             <MessageSquare className="w-4 h-4" />
-            <span>WhatsApp</span>
+            <span>WhatsApp IA</span>
           </button>
           
           <button 
@@ -277,6 +286,9 @@ const Index = () => {
                 ))}
               </div>
             </div>
+
+            {/* Sugerencias de Mejora */}
+            <ImprovementSuggestions />
           </div>
 
           {/* Panel lateral */}
@@ -373,6 +385,7 @@ const Index = () => {
       <TelemedicineModal open={telemedicineOpen} onOpenChange={setTelemedicineOpen} />
       <StockModal open={stockOpen} onOpenChange={setStockOpen} />
       <WhatsAppModal open={whatsAppOpen} onOpenChange={setWhatsAppOpen} />
+      <UserManagementModal open={userManagementOpen} onOpenChange={setUserManagementOpen} />
       
       {/* Modal de búsqueda de clientes */}
       <ClientSearchModal

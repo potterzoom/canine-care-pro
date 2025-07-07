@@ -1,8 +1,15 @@
 
 import React from 'react';
-import { Bell, User, Search, Settings } from 'lucide-react';
+import { Bell, User, Search, Settings, MessageSquare, Shield } from 'lucide-react';
 
-const Header = () => {
+interface HeaderProps {
+  onAlertsClick?: () => void;
+  onConfigClick?: () => void;
+  onWhatsAppClick?: () => void;
+  onUserManagementClick?: () => void;
+}
+
+const Header = ({ onAlertsClick, onConfigClick, onWhatsAppClick, onUserManagementClick }: HeaderProps) => {
   return (
     <header className="bg-white shadow-sm border-b border-gray-200 px-6 py-4">
       <div className="flex items-center justify-between max-w-7xl mx-auto">
@@ -31,12 +38,25 @@ const Header = () => {
 
         {/* Acciones del usuario */}
         <div className="flex items-center space-x-4">
-          <button className="relative p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors">
+          <button 
+            onClick={onAlertsClick}
+            className="relative p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors"
+          >
             <Bell className="w-5 h-5" />
             <span className="absolute -top-1 -right-1 w-3 h-3 bg-black rounded-full"></span>
           </button>
           
-          <button className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors">
+          <button 
+            onClick={onWhatsAppClick}
+            className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors"
+          >
+            <MessageSquare className="w-5 h-5" />
+          </button>
+          
+          <button 
+            onClick={onConfigClick}
+            className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors"
+          >
             <Settings className="w-5 h-5" />
           </button>
           
@@ -45,9 +65,12 @@ const Header = () => {
               <p className="text-sm font-medium text-gray-900">Dr. María González</p>
               <p className="text-xs text-gray-500">Veterinaria Senior</p>
             </div>
-            <div className="w-8 h-8 bg-gradient-to-br from-gray-600 to-gray-800 rounded-full flex items-center justify-center">
+            <button 
+              onClick={onUserManagementClick}
+              className="w-8 h-8 bg-gradient-to-br from-gray-600 to-gray-800 rounded-full flex items-center justify-center hover:from-gray-700 hover:to-gray-900 transition-colors"
+            >
               <User className="w-4 h-4 text-white" />
-            </div>
+            </button>
           </div>
         </div>
       </div>

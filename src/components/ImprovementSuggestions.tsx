@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { CheckCircle, AlertCircle, TrendingUp, Users, BarChart3, Shield } from 'lucide-react';
+import { CheckCircle, AlertCircle, TrendingUp, Users, BarChart3, Shield, Package, MessageSquare } from 'lucide-react';
 
 const ImprovementSuggestions = () => {
   const suggestions = [
