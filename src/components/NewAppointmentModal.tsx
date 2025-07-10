@@ -70,7 +70,7 @@ const NewAppointmentModal = ({ open, onOpenChange }: NewAppointmentModalProps) =
           <DialogTitle className="flex items-center space-x-2">
             <Calendar className="w-5 h-5" />
             <span>Nueva Cita</span>
-          </DialTitle>
+          </DialogTitle>
         </DialogHeader>
         
         <div className="space-y-6">
