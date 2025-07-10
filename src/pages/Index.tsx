@@ -16,10 +16,9 @@ import BillingModal from '../components/BillingModal';
 import TelemedicineModal from '../components/TelemedicineModal';
 import ClientSearchModal from '../components/ClientSearchModal';
 import StockModal from '../components/StockModal';
-import WhatsAppModal from '../components/WhatsAppModal';
 import UserManagementModal from '../components/UserManagementModal';
 import ServicesModal from '../components/ServicesModal';
-import { Calendar, User, Bell, Plus, Settings, FileText, Phone, Syringe, Receipt, Video, Package, MessageSquare, Stethoscope } from 'lucide-react';
+import { Calendar, User, Bell, Plus, Settings, FileText, Phone, Syringe, Receipt, Video, Package, Stethoscope } from 'lucide-react';
 
 const Index = () => {
   // Estados para controlar los modales
@@ -33,7 +32,6 @@ const Index = () => {
   const [billingOpen, setBillingOpen] = useState(false);
   const [telemedicineOpen, setTelemedicineOpen] = useState(false);
   const [stockOpen, setStockOpen] = useState(false);
-  const [whatsAppOpen, setWhatsAppOpen] = useState(false);
   const [userManagementOpen, setUserManagementOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   
@@ -167,7 +165,6 @@ const Index = () => {
       <Header 
         onAlertsClick={() => setAlertsOpen(true)}
         onConfigClick={() => setConfigOpen(true)}
-        onWhatsAppClick={() => setWhatsAppOpen(true)}
         onUserManagementClick={() => setUserManagementOpen(true)}
       />
       
@@ -210,10 +207,10 @@ const Index = () => {
           
           <button 
             onClick={handleSearchContact}
-            className="flex items-center space-x-2 px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg transition-colors"
+            className="flex items-center space-x-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors"
           >
             <Phone className="w-4 h-4" />
-            <span>Contactar</span>
+            <span>Comunicación IA</span>
           </button>
           
           <button 
@@ -230,14 +227,6 @@ const Index = () => {
           >
             <Package className="w-4 h-4" />
             <span>Stock</span>
-          </button>
-          
-          <button 
-            onClick={() => setWhatsAppOpen(true)}
-            className="flex items-center space-x-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors"
-          >
-            <MessageSquare className="w-4 h-4" />
-            <span>WhatsApp IA</span>
           </button>
           
           <button 
@@ -389,7 +378,6 @@ const Index = () => {
       <BillingModal open={billingOpen} onOpenChange={setBillingOpen} />
       <TelemedicineModal open={telemedicineOpen} onOpenChange={setTelemedicineOpen} />
       <StockModal open={stockOpen} onOpenChange={setStockOpen} />
-      <WhatsAppModal open={whatsAppOpen} onOpenChange={setWhatsAppOpen} />
       <UserManagementModal open={userManagementOpen} onOpenChange={setUserManagementOpen} />
       <ServicesModal open={servicesOpen} onOpenChange={setServicesOpen} />
       
@@ -398,7 +386,7 @@ const Index = () => {
         open={clientSearchOpen}
         onOpenChange={setClientSearchOpen}
         onClientSelect={handleClientSelect}
-        title={searchAction === 'history' ? 'Buscar Cliente - Ver Historia' : 'Buscar Cliente - Contactar'}
+        title={searchAction === 'history' ? 'Buscar Cliente - Ver Historia' : 'Buscar Cliente - Comunicación'}
       />
     </div>
   );
