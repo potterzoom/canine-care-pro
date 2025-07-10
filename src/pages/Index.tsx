@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -18,7 +19,7 @@ import ClientSearchModal from '../components/ClientSearchModal';
 import StockModal from '../components/StockModal';
 import UserManagementModal from '../components/UserManagementModal';
 import ServicesModal from '../components/ServicesModal';
-import { Calendar, User, Bell, Plus, Settings, FileText, Phone, Syringe, Receipt, Video, Package, Stethoscope } from 'lucide-react';
+import { Calendar, User, Bell, Plus, Settings, FileText, Phone, Syringe, Receipt, Video, Package, Stethoscope, DollarSign, Clock } from 'lucide-react';
 
 const Index = () => {
   // Estados para controlar los modales
@@ -43,32 +44,32 @@ const Index = () => {
   const todayStats = [
     {
       title: "Ingresos Hoy",
-      value: "$850",
-      change: "+12% vs ayer",
-      icon: Calendar,
+      value: "$2,450",
+      change: "+18% vs ayer ($2,075)",
+      icon: DollarSign,
       trend: "up" as const,
       color: "green" as const
     },
     {
       title: "Pacientes Atendidos",
-      value: "23",
-      change: "+5 vs ayer",
+      value: "17",
+      change: "+3 vs ayer (14)",
       icon: User,
       trend: "up" as const,
       color: "blue" as const
     },
     {
-      title: "Citas Pendientes",
-      value: "8",
-      change: "Para hoy",
+      title: "Citas Programadas",
+      value: "12",
+      change: "Restantes para hoy",
       icon: Calendar,
       trend: "neutral" as const,
       color: "purple" as const
     },
     {
-      title: "Alertas",
-      value: "3",
-      change: "Stock bajo",
+      title: "Alertas Activas",
+      value: "5",
+      change: "2 urgentes, 3 stock bajo",
       icon: Bell,
       trend: "down" as const,
       color: "orange" as const
@@ -241,7 +242,7 @@ const Index = () => {
         {/* Estadísticas del día */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           {todayStats.map((stat, index) => (
-            <div key={index} onClick={() => stat.title === "Alertas" && setAlertsOpen(true)} className={stat.title === "Alertas" ? "cursor-pointer" : ""}>
+            <div key={index} onClick={() => stat.title === "Alertas Activas" && setAlertsOpen(true)} className={stat.title === "Alertas Activas" ? "cursor-pointer" : ""}>
               <StatsCard {...stat} />
             </div>
           ))}
