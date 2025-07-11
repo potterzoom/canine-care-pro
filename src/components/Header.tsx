@@ -7,9 +7,10 @@ interface HeaderProps {
   onConfigClick?: () => void;
   onWhatsAppClick?: () => void;
   onUserManagementClick?: () => void;
+  onUserProfileClick?: () => void;
 }
 
-const Header = ({ onAlertsClick, onConfigClick, onWhatsAppClick, onUserManagementClick }: HeaderProps) => {
+const Header = ({ onAlertsClick, onConfigClick, onWhatsAppClick, onUserManagementClick, onUserProfileClick }: HeaderProps) => {
   return (
     <header className="bg-white shadow-sm border-b border-gray-200 px-6 py-4">
       <div className="flex items-center justify-between max-w-7xl mx-auto">
@@ -61,10 +62,13 @@ const Header = ({ onAlertsClick, onConfigClick, onWhatsAppClick, onUserManagemen
           </button>
           
           <div className="flex items-center space-x-3 pl-4 border-l border-gray-200">
-            <div className="text-right hidden sm:block">
-              <p className="text-sm font-medium text-gray-900">Dr. María González</p>
+            <button 
+              onClick={onUserProfileClick}
+              className="text-right hidden sm:block hover:bg-gray-50 p-2 rounded-lg transition-colors"
+            >
+              <p className="text-sm font-medium text-gray-900">Dra. María González</p>
               <p className="text-xs text-gray-500">Veterinaria Senior</p>
-            </div>
+            </button>
             <button 
               onClick={onUserManagementClick}
               className="w-8 h-8 bg-gradient-to-br from-gray-600 to-gray-800 rounded-full flex items-center justify-center hover:from-gray-700 hover:to-gray-900 transition-colors"

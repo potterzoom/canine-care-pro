@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -19,6 +18,9 @@ import ClientSearchModal from '../components/ClientSearchModal';
 import StockModal from '../components/StockModal';
 import UserManagementModal from '../components/UserManagementModal';
 import ServicesModal from '../components/ServicesModal';
+import UserProfileModal from '../components/UserProfileModal';
+import PatientsAttendedModal from '../components/PatientsAttendedModal';
+import ScheduledAppointmentsModal from '../components/ScheduledAppointmentsModal';
 import { Calendar, User, Bell, Plus, Settings, FileText, Phone, Syringe, Receipt, Video, Package, Stethoscope, DollarSign, Clock } from 'lucide-react';
 
 const Index = () => {
@@ -35,6 +37,9 @@ const Index = () => {
   const [stockOpen, setStockOpen] = useState(false);
   const [userManagementOpen, setUserManagementOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
+  const [userProfileOpen, setUserProfileOpen] = useState(false);
+  const [patientsAttendedOpen, setPatientsAttendedOpen] = useState(false);
+  const [scheduledAppointmentsOpen, setScheduledAppointmentsOpen] = useState(false);
   
   // Estados para el buscador de clientes
   const [clientSearchOpen, setClientSearchOpen] = useState(false);
@@ -43,28 +48,28 @@ const Index = () => {
 
   const todayStats = [
     {
-      title: "Ingresos Hoy",
-      value: "$2,450",
-      change: "+18% vs ayer ($2,075)",
-      icon: DollarSign,
-      trend: "up" as const,
-      color: "green" as const
-    },
-    {
       title: "Pacientes Atendidos",
-      value: "17",
-      change: "+3 vs ayer (14)",
+      value: "10",
+      change: "+3 vs ayer (7)",
       icon: User,
       trend: "up" as const,
       color: "blue" as const
     },
     {
       title: "Citas Programadas",
-      value: "12",
+      value: "7",
       change: "Restantes para hoy",
       icon: Calendar,
       trend: "neutral" as const,
       color: "purple" as const
+    },
+    {
+      title: "Horas de Consulta",
+      value: "8.5h",
+      change: "Tiempo activo hoy",
+      icon: Clock,
+      trend: "up" as const,
+      color: "green" as const
     },
     {
       title: "Alertas Activas",
@@ -161,12 +166,27 @@ const Index = () => {
     }
   };
 
+  const handleStatsClick = (title: string) => {
+    switch (title) {
+      case "Pacientes Atendidos":
+        setPatientsAttendedOpen(true);
+        break;
+      case "Citas Programadas":
+        setScheduledAppointmentsOpen(true);
+        break;
+      case "Alertas Activas":
+        setAlertsOpen(true);
+        break;
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <Header 
         onAlertsClick={() => setAlertsOpen(true)}
         onConfigClick={() => setConfigOpen(true)}
         onUserManagementClick={() => setUserManagementOpen(true)}
+        onUserProfileClick={() => setUserProfileOpen(true)}
       />
       
       <main className="flex-1 max-w-7xl mx-auto px-6 py-8">
@@ -242,7 +262,11 @@ const Index = () => {
         {/* Estadísticas del día */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           {todayStats.map((stat, index) => (
-            <div key={index} onClick={() => stat.title === "Alertas Activas" && setAlertsOpen(true)} className={stat.title === "Alertas Activas" ? "cursor-pointer" : ""}>
+            <div 
+              key={index} 
+              onClick={() => handleStatsClick(stat.title)} 
+              className={["Pacientes Atendidos", "Citas Programadas", "Alertas Activas"].includes(stat.title) ? "cursor-pointer" : ""}
+            >
               <StatsCard {...stat} />
             </div>
           ))}
@@ -381,6 +405,9 @@ const Index = () => {
       <StockModal open={stockOpen} onOpenChange={setStockOpen} />
       <UserManagementModal open={userManagementOpen} onOpenChange={setUserManagementOpen} />
       <ServicesModal open={servicesOpen} onOpenChange={setServicesOpen} />
+      <UserProfileModal open={userProfileOpen} onOpenChange={setUserProfileOpen} />
+      <PatientsAttendedModal open={patientsAttendedOpen} onOpenChange={setPatientsAttendedOpen} />
+      <ScheduledAppointmentsModal open={scheduledAppointmentsOpen} onOpenChange={setScheduledAppointmentsOpen} />
       
       {/* Modal de búsqueda de clientes */}
       <ClientSearchModal
