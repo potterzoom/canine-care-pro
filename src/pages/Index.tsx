@@ -21,7 +21,9 @@ import ServicesModal from '../components/ServicesModal';
 import UserProfileModal from '../components/UserProfileModal';
 import PatientsAttendedModal from '../components/PatientsAttendedModal';
 import ScheduledAppointmentsModal from '../components/ScheduledAppointmentsModal';
-import { Calendar, User, Bell, Plus, Settings, FileText, Phone, Syringe, Receipt, Video, Package, Stethoscope, DollarSign, Clock } from 'lucide-react';
+import VirtualAssistantModal from '../components/VirtualAssistantModal';
+import SecurityAuditModal from '../components/SecurityAuditModal';
+import { Calendar, User, Bell, Plus, Settings, FileText, Phone, Syringe, Receipt, Video, Package, Stethoscope, DollarSign, Clock, Bot, Shield } from 'lucide-react';
 
 const Index = () => {
   // Estados para controlar los modales
@@ -40,6 +42,8 @@ const Index = () => {
   const [userProfileOpen, setUserProfileOpen] = useState(false);
   const [patientsAttendedOpen, setPatientsAttendedOpen] = useState(false);
   const [scheduledAppointmentsOpen, setScheduledAppointmentsOpen] = useState(false);
+  const [virtualAssistantOpen, setVirtualAssistantOpen] = useState(false);
+  const [securityAuditOpen, setSecurityAuditOpen] = useState(false);
   
   // Estados para el buscador de clientes
   const [clientSearchOpen, setClientSearchOpen] = useState(false);
@@ -235,6 +239,30 @@ const Index = () => {
           </button>
           
           <button 
+            onClick={() => setVirtualAssistantOpen(true)}
+            className="flex items-center space-x-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors"
+          >
+            <Bot className="w-4 h-4" />
+            <span>Asistente IA</span>
+          </button>
+          
+          <button 
+            onClick={() => setTelemedicineOpen(true)}
+            className="flex items-center space-x-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+          >
+            <Video className="w-4 h-4" />
+            <span>Telemedicina</span>
+          </button>
+          
+          <button 
+            onClick={() => setSecurityAuditOpen(true)}
+            className="flex items-center space-x-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors"
+          >
+            <Shield className="w-4 h-4" />
+            <span>Seguridad</span>
+          </button>
+          
+          <button 
             onClick={() => setServicesOpen(true)}
             className="flex items-center space-x-2 px-4 py-2 bg-gray-800 hover:bg-black text-white rounded-lg transition-colors"
           >
@@ -366,13 +394,13 @@ const Index = () => {
                 </button>
                 
                 <button 
-                  onClick={() => setTelemedicineOpen(true)}
+                  onClick={() => setVirtualAssistantOpen(true)}
                   className="w-full flex items-center space-x-3 p-3 text-left hover:bg-gray-50 rounded-lg transition-colors"
                 >
-                  <span className="text-xl">📱</span>
+                  <span className="text-xl">🤖</span>
                   <div>
-                    <p className="font-medium text-gray-900">Teleconsulta</p>
-                    <p className="text-sm text-gray-500">Consultas remotas</p>
+                    <p className="font-medium text-gray-900">Asistente IA</p>
+                    <p className="text-sm text-gray-500">Automatización inteligente</p>
                   </div>
                 </button>
               </div>
@@ -383,7 +411,7 @@ const Index = () => {
 
       <Footer />
 
-      {/* Modales */}
+      {/* Modales Existentes */}
       <AlertsModal open={alertsOpen} onOpenChange={setAlertsOpen} />
       <ConfigModal open={configOpen} onOpenChange={setConfigOpen} />
       <NewAppointmentModal open={newAppointmentOpen} onOpenChange={setNewAppointmentOpen} />
@@ -408,6 +436,10 @@ const Index = () => {
       <UserProfileModal open={userProfileOpen} onOpenChange={setUserProfileOpen} />
       <PatientsAttendedModal open={patientsAttendedOpen} onOpenChange={setPatientsAttendedOpen} />
       <ScheduledAppointmentsModal open={scheduledAppointmentsOpen} onOpenChange={setScheduledAppointmentsOpen} />
+      
+      {/* Nuevos Modales Avanzados */}
+      <VirtualAssistantModal open={virtualAssistantOpen} onOpenChange={setVirtualAssistantOpen} />
+      <SecurityAuditModal open={securityAuditOpen} onOpenChange={setSecurityAuditOpen} />
       
       {/* Modal de búsqueda de clientes */}
       <ClientSearchModal
