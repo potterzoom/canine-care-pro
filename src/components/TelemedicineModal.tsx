@@ -379,7 +379,7 @@ const TelemedicineModal = ({ open, onOpenChange }: TelemedicineModalProps) => {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="font-medium">Frecuencia Cardíaca Alta</p>
-                    <p className="text-sm text-gray-600">Alertar cuando > 110 BPM</p>
+                    <p className="text-sm text-gray-600">Alertar cuando &gt; 110 BPM</p>
                   </div>
                   <input type="checkbox" defaultChecked className="rounded border-gray-300" />
                 </div>
@@ -387,7 +387,7 @@ const TelemedicineModal = ({ open, onOpenChange }: TelemedicineModalProps) => {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="font-medium">Temperatura Elevada</p>
-                    <p className="text-sm text-gray-600">Alertar cuando > 39°C</p>
+                    <p className="text-sm text-gray-600">Alertar cuando &gt; 39°C</p>
                   </div>
                   <input type="checkbox" defaultChecked className="rounded border-gray-300" />
                 </div>
@@ -395,7 +395,7 @@ const TelemedicineModal = ({ open, onOpenChange }: TelemedicineModalProps) => {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="font-medium">Baja Actividad</p>
-                    <p className="text-sm text-gray-600">Alertar cuando < 30%</p>
+                    <p className="text-sm text-gray-600">Alertar cuando &lt; 30%</p>
                   </div>
                   <input type="checkbox" className="rounded border-gray-300" />
                 </div>
