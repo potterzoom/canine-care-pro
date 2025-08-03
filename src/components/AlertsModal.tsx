@@ -1,10 +1,12 @@
 
 import React, { useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Bell, Package, Calendar, AlertTriangle, Search, Filter, Clock, User, Syringe, FileText } from 'lucide-react';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Badge } from '@/components/ui/badge';
+import { Bell, AlertTriangle, Calendar, Package, Heart, Clock } from 'lucide-react';
+import IntelligentAlertsSystem from './IntelligentAlertsSystem';
+import AutomatedReminders from './AutomatedReminders';
 
 interface AlertsModalProps {
   open: boolean;
@@ -12,152 +14,151 @@ interface AlertsModalProps {
 }
 
 const AlertsModal = ({ open, onOpenChange }: AlertsModalProps) => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('all');
-
-  const alerts = [
+  const [alerts] = useState([
     {
-      id: 1,
-      type: 'stock',
-      category: 'Inventario',
-      title: 'Stock Bajo',
-      message: 'Amoxicilina 500mg - Solo quedan 5 unidades',
-      time: '2 min ago',
-      icon: Package,
-      urgent: true
+      type: 'urgent',
+      title: 'Stock Crítico - Vacuna Antirrábica',
+      message: 'Solo quedan 2 dosis en inventario',
+      time: '10:30 AM',
+      icon: Package
     },
     {
-      id: 2,
       type: 'appointment',
-      category: 'Citas',
-      title: 'Cita Próxima',
-      message: 'Max - Consulta general en 30 minutos',
-      time: '5 min ago',
-      icon: Calendar,
-      urgent: false
+      title: 'Cita Urgente - Luna (María García)',
+      message: 'Reagendar cita cancelada para emergencia',
+      time: '09:15 AM',
+      icon: Calendar
     },
     {
-      id: 3,
-      type: 'vaccine',
-      category: 'Vacunas',
-      title: 'Vacuna Vencida',
-      message: 'Luna necesita refuerzo de rabia',
-      time: '1 hora ago',
-      icon: Syringe,
-      urgent: true
-    },
-    {
-      id: 4,
-      type: 'payment',
-      category: 'Pagos',
-      title: 'Pago Pendiente',
-      message: 'Factura #1234 - Juan Pérez - $85.50',
-      time: '2 horas ago',
-      icon: FileText,
-      urgent: false
-    },
-    {
-      id: 5,
-      type: 'patient',
-      category: 'Pacientes',
-      title: 'Seguimiento Requerido',
-      message: 'Rocky necesita revisión post-cirugía',
-      time: '3 horas ago',
-      icon: User,
-      urgent: true
-    },
-    {
-      id: 6,
-      type: 'system',
-      category: 'Sistema',
-      title: 'Respaldo Completado',
-      message: 'Respaldo automático realizado exitosamente',
-      time: '6 horas ago',
-      icon: Clock,
-      urgent: false
+      type: 'medical',
+      title: 'Seguimiento Post-Cirugía - Rocky',
+      message: 'Control programado para hoy',
+      time: '08:45 AM',
+      icon: Heart
     }
-  ];
+  ]);
 
-  const categories = ['all', 'Inventario', 'Citas', 'Vacunas', 'Pagos', 'Pacientes', 'Sistema'];
+  const getAlertColor = (type: string) => {
+    switch (type) {
+      case 'urgent':
+        return 'border-l-red-500 bg-red-50';
+      case 'appointment':
+        return 'border-l-blue-500 bg-blue-50';
+      case 'medical':
+        return 'border-l-green-500 bg-green-50';
+      default:
+        return 'border-l-gray-500 bg-gray-50';
+    }
+  };
 
-  const filteredAlerts = alerts.filter(alert => {
-    const matchesSearch = alert.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         alert.message.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = selectedCategory === 'all' || alert.category === selectedCategory;
-    return matchesSearch && matchesCategory;
-  });
+  const getAlertBadgeColor = (type: string) => {
+    switch (type) {
+      case 'urgent':
+        return 'bg-red-100 text-red-800';
+      case 'appointment':
+        return 'bg-blue-100 text-blue-800';
+      case 'medical':
+        return 'bg-green-100 text-green-800';
+      default:
+        return 'bg-gray-100 text-gray-800';
+    }
+  };
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+      <DialogContent className="max-w-6xl max-h-[90vh] overflow-hidden">
         <DialogHeader>
           <DialogTitle className="flex items-center space-x-2">
             <Bell className="w-5 h-5" />
-            <span>Centro de Alertas</span>
+            <span>Sistema de Alertas Inteligentes</span>
           </DialogTitle>
         </DialogHeader>
         
-        {/* Buscador y filtros */}
-        <div className="space-y-4">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-            <Input
-              placeholder="Buscar alertas..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10"
-            />
-          </div>
-          
-          <div className="flex items-center space-x-2">
-            <Filter className="w-4 h-4 text-gray-500" />
-            <select
-              value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
-              className="px-3 py-1 border border-gray-300 rounded-md bg-white text-sm"
-            >
-              <option value="all">Todas las categorías</option>
-              {categories.slice(1).map(category => (
-                <option key={category} value={category}>{category}</option>
-              ))}
-            </select>
-          </div>
-        </div>
-        
-        <div className="space-y-4 max-h-96 overflow-y-auto">
-          {filteredAlerts.map((alert) => (
-            <Alert key={alert.id} className={`${alert.urgent ? 'border-gray-400 bg-gray-100' : 'border-gray-300 bg-gray-50'}`}>
-              <alert.icon className="h-4 w-4" />
-              <AlertDescription>
-                <div className="space-y-1">
-                  <div className="flex justify-between items-start">
-                    <div className="flex items-center space-x-2">
-                      <p className="font-medium text-sm">{alert.title}</p>
-                      <span className="px-2 py-1 bg-gray-200 text-gray-700 text-xs rounded-full">
-                        {alert.category}
-                      </span>
-                    </div>
-                    <span className="text-xs text-gray-500">{alert.time}</span>
-                  </div>
-                  <p className="text-sm text-gray-600">{alert.message}</p>
+        <Tabs defaultValue="alerts" className="flex-1 flex flex-col">
+          <TabsList className="grid w-full grid-cols-3">
+            <TabsTrigger value="alerts">Alertas Básicas</TabsTrigger>
+            <TabsTrigger value="intelligent">Alertas IA</TabsTrigger>
+            <TabsTrigger value="reminders">Recordatorios</TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="alerts" className="flex-1 overflow-y-auto space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+              <div className="bg-red-50 p-4 rounded-lg border border-red-200">
+                <div className="flex items-center space-x-2 mb-2">
+                  <AlertTriangle className="w-5 h-5 text-red-600" />
+                  <h3 className="font-semibold text-red-900">Alertas Urgentes</h3>
                 </div>
-              </AlertDescription>
-            </Alert>
-          ))}
-          
-          {filteredAlerts.length === 0 && (
-            <div className="text-center py-8 text-gray-500">
-              No se encontraron alertas que coincidan con tu búsqueda
+                <p className="text-2xl font-bold text-red-700">2</p>
+                <p className="text-sm text-red-600">Requieren atención inmediata</p>
+              </div>
+              
+              <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                <div className="flex items-center space-x-2 mb-2">
+                  <Calendar className="w-5 h-5 text-blue-600" />
+                  <h3 className="font-semibold text-blue-900">Citas Pendientes</h3>
+                </div>
+                <p className="text-2xl font-bold text-blue-700">3</p>
+                <p className="text-sm text-blue-600">Para gestionar hoy</p>
+              </div>
+              
+              <div className="bg-green-50 p-4 rounded-lg border border-green-200">
+                <div className="flex items-center space-x-2 mb-2">
+                  <Heart className="w-5 h-5 text-green-600" />
+                  <h3 className="font-semibold text-green-900">Seguimientos</h3>
+                </div>
+                <p className="text-2xl font-bold text-green-700">4</p>
+                <p className="text-sm text-green-600">Controles programados</p>
+              </div>
             </div>
-          )}
-        </div>
+
+            <div className="space-y-4">
+              <h3 className="text-lg font-semibold mb-4">Alertas Activas</h3>
+              {alerts.map((alert, index) => (
+                <div key={index} className={`border-l-4 p-4 rounded-r-lg ${getAlertColor(alert.type)}`}>
+                  <div className="flex items-start justify-between">
+                    <div className="flex items-start space-x-3">
+                      <alert.icon className="w-5 h-5 mt-1 flex-shrink-0" />
+                      <div>
+                        <div className="flex items-center space-x-2 mb-1">
+                          <h4 className="font-medium text-gray-900">{alert.title}</h4>
+                          <Badge className={`text-xs ${getAlertBadgeColor(alert.type)}`}>
+                            {alert.type === 'urgent' ? 'Urgente' : 
+                             alert.type === 'appointment' ? 'Cita' : 'Médico'}
+                          </Badge>
+                        </div>
+                        <p className="text-gray-700">{alert.message}</p>
+                        <p className="text-sm text-gray-500 mt-1">{alert.time}</p>
+                      </div>
+                    </div>
+                    <div className="flex space-x-2">
+                      <Button size="sm" className="bg-gray-800 hover:bg-black">
+                        Resolver
+                      </Button>
+                      <Button size="sm" variant="outline">
+                        Posponer
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </TabsContent>
+
+          <TabsContent value="intelligent" className="flex-1 overflow-y-auto">
+            <IntelligentAlertsSystem />
+          </TabsContent>
+
+          <TabsContent value="reminders" className="flex-1 overflow-y-auto">
+            <AutomatedReminders />
+          </TabsContent>
+        </Tabs>
         
-        <div className="flex justify-end space-x-2">
+        <div className="flex justify-end space-x-2 pt-4 border-t">
           <Button variant="outline" onClick={() => onOpenChange(false)}>
             Cerrar
           </Button>
           <Button className="bg-gray-800 hover:bg-black">
-            Marcar Todo Leído
+            Configurar Notificaciones
           </Button>
         </div>
       </DialogContent>

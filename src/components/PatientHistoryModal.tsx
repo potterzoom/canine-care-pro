@@ -1,11 +1,12 @@
-
 import React, { useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
-import { User, Calendar, FileText, Search, Filter, Clock, Stethoscope, Syringe, AlertTriangle, Heart, Pill, Activity } from 'lucide-react';
+import { User, Calendar, FileText, Search, Filter, Clock, Stethoscope, Syringe, AlertTriangle, Heart, Pill, Activity, TrendingUp } from 'lucide-react';
+import HealthDataVisualization from './HealthDataVisualization';
+import IntelligentAlertsSystem from './IntelligentAlertsSystem';
 
 interface PatientHistoryModalProps {
   open: boolean;
@@ -131,7 +132,7 @@ const PatientHistoryModal = ({ open, onOpenChange, patientName = "Max" }: Patien
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-6xl max-h-[90vh] overflow-hidden">
+      <DialogContent className="max-w-7xl max-h-[90vh] overflow-hidden">
         <DialogHeader>
           <DialogTitle className="flex items-center space-x-2">
             <FileText className="w-5 h-5" />
@@ -140,8 +141,10 @@ const PatientHistoryModal = ({ open, onOpenChange, patientName = "Max" }: Patien
         </DialogHeader>
         
         <Tabs defaultValue="history" className="flex-1 flex flex-col">
-          <TabsList className="grid w-full grid-cols-3">
+          <TabsList className="grid w-full grid-cols-5">
             <TabsTrigger value="history">Historial Médico</TabsTrigger>
+            <TabsTrigger value="health-data">Datos de Salud</TabsTrigger>
+            <TabsTrigger value="alerts">Alertas IA</TabsTrigger>
             <TabsTrigger value="stats">Estadísticas</TabsTrigger>
             <TabsTrigger value="documents">Documentos</TabsTrigger>
           </TabsList>
@@ -280,6 +283,14 @@ const PatientHistoryModal = ({ open, onOpenChange, patientName = "Max" }: Patien
                 ))
               )}
             </div>
+          </TabsContent>
+
+          <TabsContent value="health-data" className="flex-1 overflow-y-auto">
+            <HealthDataVisualization />
+          </TabsContent>
+
+          <TabsContent value="alerts" className="flex-1 overflow-y-auto">
+            <IntelligentAlertsSystem />
           </TabsContent>
 
           <TabsContent value="stats" className="flex-1 overflow-y-auto space-y-6">
