@@ -1,16 +1,16 @@
 
 import React from 'react';
-import { Bell, User, Search, Settings, MessageSquare, Shield } from 'lucide-react';
+import { Bell, User, Search, Settings, Phone, Shield } from 'lucide-react';
 
 interface HeaderProps {
   onAlertsClick?: () => void;
   onConfigClick?: () => void;
-  onWhatsAppClick?: () => void;
+  onCallClick?: () => void;
   onUserManagementClick?: () => void;
   onUserProfileClick?: () => void;
 }
 
-const Header = ({ onAlertsClick, onConfigClick, onWhatsAppClick, onUserManagementClick, onUserProfileClick }: HeaderProps) => {
+const Header = ({ onAlertsClick, onConfigClick, onCallClick, onUserManagementClick, onUserProfileClick }: HeaderProps) => {
   return (
     <header className="bg-white shadow-sm border-b border-gray-200 px-6 py-4">
       <div className="flex items-center justify-between max-w-7xl mx-auto">
@@ -48,10 +48,10 @@ const Header = ({ onAlertsClick, onConfigClick, onWhatsAppClick, onUserManagemen
           </button>
           
           <button 
-            onClick={onWhatsAppClick}
+            onClick={onCallClick}
             className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors"
           >
-            <MessageSquare className="w-5 h-5" />
+            <Phone className="w-5 h-5" />
           </button>
           
           <button 

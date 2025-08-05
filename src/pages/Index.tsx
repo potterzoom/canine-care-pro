@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -23,7 +24,9 @@ import PatientsAttendedModal from '../components/PatientsAttendedModal';
 import ScheduledAppointmentsModal from '../components/ScheduledAppointmentsModal';
 import VirtualAssistantModal from '../components/VirtualAssistantModal';
 import SecurityAuditModal from '../components/SecurityAuditModal';
-import { Calendar, User, Bell, Plus, Settings, FileText, Phone, Syringe, Receipt, Video, Package, Stethoscope, DollarSign, Clock, Bot, Shield } from 'lucide-react';
+import { useDailyStats } from '../hooks/useDailyStats';
+import { useTodayPatients } from '../hooks/useTodayPatients';
+import { Calendar, User, Bell, Plus, Settings, FileText, Phone, Syringe, Receipt, Video, Package, Stethoscope, DollarSign, Clock, Bot, Shield, Play, Pause } from 'lucide-react';
 
 const Index = () => {
   // Estados para controlar los modales
@@ -50,18 +53,22 @@ const Index = () => {
   const [searchAction, setSearchAction] = useState<'history' | 'contact'>('history');
   const [selectedClient, setSelectedClient] = useState<any>(null);
 
+  // Hooks para estadísticas y pacientes del día
+  const { stats, isTimerRunning, startTimer, stopTimer, addPatient, formatHours } = useDailyStats();
+  const { getRecentPatients, getPatientCount, addPatient: addTodayPatient } = useTodayPatients();
+
   const todayStats = [
     {
       title: "Pacientes Atendidos",
-      value: "10",
-      change: "+3 vs ayer (7)",
+      value: stats.patientsAttended.toString(),
+      change: `Total del día: ${getPatientCount()}`,
       icon: User,
       trend: "up" as const,
       color: "blue" as const
     },
     {
       title: "Citas Programadas",
-      value: "7",
+      value: stats.scheduledAppointments.toString(),
       change: "Restantes para hoy",
       icon: Calendar,
       trend: "neutral" as const,
@@ -69,15 +76,15 @@ const Index = () => {
     },
     {
       title: "Horas de Consulta",
-      value: "8.5h",
-      change: "Tiempo activo hoy",
+      value: formatHours(stats.consultationHours),
+      change: isTimerRunning ? "⏱️ En consulta" : "⏸️ Timer pausado",
       icon: Clock,
-      trend: "up" as const,
+      trend: isTimerRunning ? "up" as const : "neutral" as const,
       color: "green" as const
     },
     {
       title: "Alertas Activas",
-      value: "5",
+      value: stats.activeAlerts.toString(),
       change: "2 urgentes, 3 stock bajo",
       icon: Bell,
       trend: "down" as const,
@@ -110,27 +117,7 @@ const Index = () => {
     }
   ];
 
-  const recentPatients = [
-    {
-      name: "Buddy",
-      species: "Perro",
-      breed: "Golden Retriever",
-      age: "3 años",
-      owner: "Ana López",
-      lastVisit: "15 Nov 2024",
-      nextVaccine: "15 Dic 2024"
-    },
-    {
-      name: "Whiskers",
-      species: "Gato",
-      breed: "Persa",
-      age: "2 años",
-      owner: "Pedro Silva",
-      lastVisit: "12 Nov 2024",
-      nextVaccine: "10 Ene 2025",
-      urgent: true
-    }
-  ];
+  const recentPatients = getRecentPatients(2);
 
   const lowStockItems = [
     {
@@ -178,10 +165,31 @@ const Index = () => {
       case "Citas Programadas":
         setScheduledAppointmentsOpen(true);
         break;
+      case "Horas de Consulta":
+        // Toggle timer
+        if (isTimerRunning) {
+          stopTimer();
+        } else {
+          startTimer();
+        }
+        break;
       case "Alertas Activas":
         setAlertsOpen(true);
         break;
     }
+  };
+
+  const handleAddNewPatient = () => {
+    // Simular agregar un nuevo paciente
+    const newPatients = [
+      { name: "Rex", species: "Perro", breed: "Pastor Alemán", age: "5 años", owner: "Carlos Ruiz", nextVaccine: "20 Dic 2024" },
+      { name: "Mimi", species: "Gato", breed: "Siamés", age: "1 año", owner: "Laura Vega", nextVaccine: "15 Ene 2025" },
+      { name: "Thor", species: "Perro", breed: "Rottweiler", age: "4 años", owner: "Miguel Castro", nextVaccine: "25 Dic 2024" }
+    ];
+    
+    const randomPatient = newPatients[Math.floor(Math.random() * newPatients.length)];
+    addTodayPatient(randomPatient);
+    addPatient(); // Incrementar contador de pacientes atendidos
   };
 
   return (
@@ -189,6 +197,7 @@ const Index = () => {
       <Header 
         onAlertsClick={() => setAlertsOpen(true)}
         onConfigClick={() => setConfigOpen(true)}
+        onCallClick={() => setContactOpen(true)}
         onUserManagementClick={() => setUserManagementOpen(true)}
         onUserProfileClick={() => setUserProfileOpen(true)}
       />
@@ -285,6 +294,19 @@ const Index = () => {
             <Settings className="w-4 h-4" />
             <span>Configuración</span>
           </button>
+
+          {/* Control del Timer */}
+          <button 
+            onClick={() => isTimerRunning ? stopTimer() : startTimer()}
+            className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors ${
+              isTimerRunning 
+                ? 'bg-red-600 hover:bg-red-700 text-white' 
+                : 'bg-green-600 hover:bg-green-700 text-white'
+            }`}
+          >
+            {isTimerRunning ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
+            <span>{isTimerRunning ? 'Pausar Timer' : 'Iniciar Timer'}</span>
+          </button>
         </div>
 
         {/* Estadísticas del día */}
@@ -293,7 +315,7 @@ const Index = () => {
             <div 
               key={index} 
               onClick={() => handleStatsClick(stat.title)} 
-              className={["Pacientes Atendidos", "Citas Programadas", "Alertas Activas"].includes(stat.title) ? "cursor-pointer" : ""}
+              className="cursor-pointer"
             >
               <StatsCard {...stat} />
             </div>
@@ -322,18 +344,35 @@ const Index = () => {
               </div>
             </div>
 
-            {/* Pacientes Recientes */}
+            {/* Pacientes Recientes del Día */}
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-6">Pacientes Recientes</h3>
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-lg font-semibold text-gray-900">
+                  Pacientes Recientes del Día ({getPatientCount()})
+                </h3>
+                <button 
+                  onClick={handleAddNewPatient}
+                  className="flex items-center space-x-2 px-3 py-1 bg-green-600 hover:bg-green-700 text-white text-sm rounded-lg transition-colors"
+                >
+                  <Plus className="w-3 h-3" />
+                  <span>Agregar</span>
+                </button>
+              </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {recentPatients.map((patient, index) => (
-                  <PatientCard 
-                    key={index} 
-                    {...patient} 
-                    onViewHistory={() => setHistoryOpen(true)}
-                    onContact={() => setContactOpen(true)}
-                  />
-                ))}
+                {recentPatients.length > 0 ? (
+                  recentPatients.map((patient, index) => (
+                    <PatientCard 
+                      key={patient.id} 
+                      {...patient} 
+                      onViewHistory={() => setHistoryOpen(true)}
+                      onContact={() => setContactOpen(true)}
+                    />
+                  ))
+                ) : (
+                  <div className="col-span-2 text-center text-gray-500 py-8">
+                    No hay pacientes registrados hoy. ¡Agrega el primer paciente del día!
+                  </div>
+                )}
               </div>
             </div>
           </div>
