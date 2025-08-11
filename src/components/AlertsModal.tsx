@@ -1,6 +1,5 @@
-
 import React, { useState } from 'react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Dialog, DialogContent } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
@@ -67,25 +66,23 @@ const AlertsModal = ({ open, onOpenChange }: AlertsModalProps) => {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-6xl h-[90vh] flex flex-col">
-        <DialogHeader className="flex-shrink-0">
-          <DialogTitle className="flex items-center space-x-2">
-            <Bell className="w-5 h-5" />
-            <span>Sistema de Alertas Inteligentes</span>
-          </DialogTitle>
-        </DialogHeader>
-        
-        <div className="flex-1 overflow-hidden">
-          <Tabs defaultValue="alerts" className="w-full h-full flex flex-col">
-            <TabsList className="grid w-full grid-cols-3 mb-6 flex-shrink-0">
-              <TabsTrigger value="alerts">Alertas Básicas</TabsTrigger>
-              <TabsTrigger value="intelligent">Alertas IA</TabsTrigger>
-              <TabsTrigger value="reminders">Recordatorios</TabsTrigger>
-            </TabsList>
+      <DialogContent className="max-w-6xl h-[90vh] p-0 overflow-hidden">
+        <ScrollArea className="h-full w-full">
+          <div className="p-6">
+            <div className="flex items-center space-x-2 mb-6">
+              <Bell className="w-5 h-5" />
+              <h2 className="text-lg font-semibold">Sistema de Alertas Inteligentes</h2>
+            </div>
+            
+            <Tabs defaultValue="alerts" className="w-full">
+              <TabsList className="grid w-full grid-cols-3 mb-6">
+                <TabsTrigger value="alerts">Alertas Básicas</TabsTrigger>
+                <TabsTrigger value="intelligent">Alertas IA</TabsTrigger>
+                <TabsTrigger value="reminders">Recordatorios</TabsTrigger>
+              </TabsList>
 
-            <TabsContent value="alerts" className="flex-1 overflow-hidden">
-              <ScrollArea className="h-full">
-                <div className="space-y-6 pr-4">
+              <TabsContent value="alerts">
+                <div className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                     <div className="bg-red-50 p-4 rounded-lg border border-red-200">
                       <div className="flex items-center space-x-2 mb-2">
@@ -147,35 +144,27 @@ const AlertsModal = ({ open, onOpenChange }: AlertsModalProps) => {
                     ))}
                   </div>
                 </div>
-              </ScrollArea>
-            </TabsContent>
+              </TabsContent>
 
-            <TabsContent value="intelligent" className="flex-1 overflow-hidden">
-              <ScrollArea className="h-full">
-                <div className="pr-4">
-                  <IntelligentAlertsSystem />
-                </div>
-              </ScrollArea>
-            </TabsContent>
+              <TabsContent value="intelligent">
+                <IntelligentAlertsSystem />
+              </TabsContent>
 
-            <TabsContent value="reminders" className="flex-1 overflow-hidden">
-              <ScrollArea className="h-full">
-                <div className="pr-4">
-                  <AutomatedReminders />
-                </div>
-              </ScrollArea>
-            </TabsContent>
-          </Tabs>
-        </div>
-        
-        <div className="flex justify-end space-x-2 pt-4 border-t flex-shrink-0">
-          <Button variant="outline" onClick={() => onOpenChange(false)}>
-            Cerrar
-          </Button>
-          <Button className="bg-gray-800 hover:bg-black">
-            Configurar Notificaciones
-          </Button>
-        </div>
+              <TabsContent value="reminders">
+                <AutomatedReminders />
+              </TabsContent>
+            </Tabs>
+            
+            <div className="flex justify-end space-x-2 pt-6 mt-6 border-t">
+              <Button variant="outline" onClick={() => onOpenChange(false)}>
+                Cerrar
+              </Button>
+              <Button className="bg-gray-800 hover:bg-black">
+                Configurar Notificaciones
+              </Button>
+            </div>
+          </div>
+        </ScrollArea>
       </DialogContent>
     </Dialog>
   );
