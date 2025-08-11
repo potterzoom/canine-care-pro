@@ -67,102 +67,110 @@ const AlertsModal = ({ open, onOpenChange }: AlertsModalProps) => {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-6xl max-h-[90vh] flex flex-col">
-        <DialogHeader className="flex-shrink-0">
-          <DialogTitle className="flex items-center space-x-2">
-            <Bell className="w-5 h-5" />
-            <span>Sistema de Alertas Inteligentes</span>
-          </DialogTitle>
-        </DialogHeader>
-        
-        <ScrollArea className="flex-1 pr-4">
-          <Tabs defaultValue="alerts" className="w-full">
-            <TabsList className="grid w-full grid-cols-3 mb-6">
-              <TabsTrigger value="alerts">Alertas Básicas</TabsTrigger>
-              <TabsTrigger value="intelligent">Alertas IA</TabsTrigger>
-              <TabsTrigger value="reminders">Recordatorios</TabsTrigger>
-            </TabsList>
+      <DialogContent className="max-w-6xl h-[90vh] p-0">
+        <div className="flex flex-col h-full">
+          <DialogHeader className="px-6 py-4 border-b">
+            <DialogTitle className="flex items-center space-x-2">
+              <Bell className="w-5 h-5" />
+              <span>Sistema de Alertas Inteligentes</span>
+            </DialogTitle>
+          </DialogHeader>
+          
+          <div className="flex-1 overflow-hidden">
+            <ScrollArea className="h-full">
+              <div className="p-6">
+                <Tabs defaultValue="alerts" className="w-full">
+                  <TabsList className="grid w-full grid-cols-3 mb-6">
+                    <TabsTrigger value="alerts">Alertas Básicas</TabsTrigger>
+                    <TabsTrigger value="intelligent">Alertas IA</TabsTrigger>
+                    <TabsTrigger value="reminders">Recordatorios</TabsTrigger>
+                  </TabsList>
 
-            <TabsContent value="alerts" className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                <div className="bg-red-50 p-4 rounded-lg border border-red-200">
-                  <div className="flex items-center space-x-2 mb-2">
-                    <AlertTriangle className="w-5 h-5 text-red-600" />
-                    <h3 className="font-semibold text-red-900">Alertas Urgentes</h3>
-                  </div>
-                  <p className="text-2xl font-bold text-red-700">2</p>
-                  <p className="text-sm text-red-600">Requieren atención inmediata</p>
-                </div>
-                
-                <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
-                  <div className="flex items-center space-x-2 mb-2">
-                    <Calendar className="w-5 h-5 text-blue-600" />
-                    <h3 className="font-semibold text-blue-900">Citas Pendientes</h3>
-                  </div>
-                  <p className="text-2xl font-bold text-blue-700">3</p>
-                  <p className="text-sm text-blue-600">Para gestionar hoy</p>
-                </div>
-                
-                <div className="bg-green-50 p-4 rounded-lg border border-green-200">
-                  <div className="flex items-center space-x-2 mb-2">
-                    <Heart className="w-5 h-5 text-green-600" />
-                    <h3 className="font-semibold text-green-900">Seguimientos</h3>
-                  </div>
-                  <p className="text-2xl font-bold text-green-700">4</p>
-                  <p className="text-sm text-green-600">Controles programados</p>
-                </div>
-              </div>
-
-              <div className="space-y-4">
-                <h3 className="text-lg font-semibold mb-4">Alertas Activas</h3>
-                {alerts.map((alert, index) => (
-                  <div key={index} className={`border-l-4 p-4 rounded-r-lg ${getAlertColor(alert.type)}`}>
-                    <div className="flex items-start justify-between">
-                      <div className="flex items-start space-x-3">
-                        <alert.icon className="w-5 h-5 mt-1 flex-shrink-0" />
-                        <div>
-                          <div className="flex items-center space-x-2 mb-1">
-                            <h4 className="font-medium text-gray-900">{alert.title}</h4>
-                            <Badge className={`text-xs ${getAlertBadgeColor(alert.type)}`}>
-                              {alert.type === 'urgent' ? 'Urgente' : 
-                               alert.type === 'appointment' ? 'Cita' : 'Médico'}
-                            </Badge>
-                          </div>
-                          <p className="text-gray-700">{alert.message}</p>
-                          <p className="text-sm text-gray-500 mt-1">{alert.time}</p>
+                  <TabsContent value="alerts" className="space-y-6">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                      <div className="bg-red-50 p-4 rounded-lg border border-red-200">
+                        <div className="flex items-center space-x-2 mb-2">
+                          <AlertTriangle className="w-5 h-5 text-red-600" />
+                          <h3 className="font-semibold text-red-900">Alertas Urgentes</h3>
                         </div>
+                        <p className="text-2xl font-bold text-red-700">2</p>
+                        <p className="text-sm text-red-600">Requieren atención inmediata</p>
                       </div>
-                      <div className="flex space-x-2">
-                        <Button size="sm" className="bg-gray-800 hover:bg-black">
-                          Resolver
-                        </Button>
-                        <Button size="sm" variant="outline">
-                          Posponer
-                        </Button>
+                      
+                      <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                        <div className="flex items-center space-x-2 mb-2">
+                          <Calendar className="w-5 h-5 text-blue-600" />
+                          <h3 className="font-semibold text-blue-900">Citas Pendientes</h3>
+                        </div>
+                        <p className="text-2xl font-bold text-blue-700">3</p>
+                        <p className="text-sm text-blue-600">Para gestionar hoy</p>
+                      </div>
+                      
+                      <div className="bg-green-50 p-4 rounded-lg border border-green-200">
+                        <div className="flex items-center space-x-2 mb-2">
+                          <Heart className="w-5 h-5 text-green-600" />
+                          <h3 className="font-semibold text-green-900">Seguimientos</h3>
+                        </div>
+                        <p className="text-2xl font-bold text-green-700">4</p>
+                        <p className="text-sm text-green-600">Controles programados</p>
                       </div>
                     </div>
-                  </div>
-                ))}
+
+                    <div className="space-y-4">
+                      <h3 className="text-lg font-semibold mb-4">Alertas Activas</h3>
+                      {alerts.map((alert, index) => (
+                        <div key={index} className={`border-l-4 p-4 rounded-r-lg ${getAlertColor(alert.type)}`}>
+                          <div className="flex items-start justify-between">
+                            <div className="flex items-start space-x-3">
+                              <alert.icon className="w-5 h-5 mt-1 flex-shrink-0" />
+                              <div>
+                                <div className="flex items-center space-x-2 mb-1">
+                                  <h4 className="font-medium text-gray-900">{alert.title}</h4>
+                                  <Badge className={`text-xs ${getAlertBadgeColor(alert.type)}`}>
+                                    {alert.type === 'urgent' ? 'Urgente' : 
+                                     alert.type === 'appointment' ? 'Cita' : 'Médico'}
+                                  </Badge>
+                                </div>
+                                <p className="text-gray-700">{alert.message}</p>
+                                <p className="text-sm text-gray-500 mt-1">{alert.time}</p>
+                              </div>
+                            </div>
+                            <div className="flex space-x-2">
+                              <Button size="sm" className="bg-gray-800 hover:bg-black">
+                                Resolver
+                              </Button>
+                              <Button size="sm" variant="outline">
+                                Posponer
+                              </Button>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </TabsContent>
+
+                  <TabsContent value="intelligent">
+                    <IntelligentAlertsSystem />
+                  </TabsContent>
+
+                  <TabsContent value="reminders">
+                    <AutomatedReminders />
+                  </TabsContent>
+                </Tabs>
               </div>
-            </TabsContent>
-
-            <TabsContent value="intelligent">
-              <IntelligentAlertsSystem />
-            </TabsContent>
-
-            <TabsContent value="reminders">
-              <AutomatedReminders />
-            </TabsContent>
-          </Tabs>
-        </ScrollArea>
-        
-        <div className="flex justify-end space-x-2 pt-4 border-t flex-shrink-0">
-          <Button variant="outline" onClick={() => onOpenChange(false)}>
-            Cerrar
-          </Button>
-          <Button className="bg-gray-800 hover:bg-black">
-            Configurar Notificaciones
-          </Button>
+            </ScrollArea>
+          </div>
+          
+          <div className="px-6 py-4 border-t bg-white">
+            <div className="flex justify-end space-x-2">
+              <Button variant="outline" onClick={() => onOpenChange(false)}>
+                Cerrar
+              </Button>
+              <Button className="bg-gray-800 hover:bg-black">
+                Configurar Notificaciones
+              </Button>
+            </div>
+          </div>
         </div>
       </DialogContent>
     </Dialog>

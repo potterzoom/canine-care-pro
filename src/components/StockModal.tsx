@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
@@ -159,224 +158,228 @@ const StockModal = ({ open, onOpenChange }: StockModalProps) => {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-6xl max-h-[90vh] flex flex-col">
-        <DialogHeader className="flex-shrink-0">
-          <DialogTitle className="flex items-center space-x-2">
-            <Package className="w-5 h-5" />
-            <span>Control de Stock</span>
-          </DialogTitle>
-        </DialogHeader>
+      <DialogContent className="max-w-6xl h-[90vh] p-0">
+        <div className="flex flex-col h-full">
+          <DialogHeader className="px-6 py-4 border-b">
+            <DialogTitle className="flex items-center space-x-2">
+              <Package className="w-5 h-5" />
+              <span>Control de Stock</span>
+            </DialogTitle>
+          </DialogHeader>
 
-        <ScrollArea className="flex-1 pr-4">
-          <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="grid w-full grid-cols-4 mb-6">
-              <TabsTrigger value="farmacia" className="flex items-center space-x-2">
-                <Pill className="w-4 h-4" />
-                <span>Farmacia</span>
-              </TabsTrigger>
-              <TabsTrigger value="vacunas" className="flex items-center space-x-2">
-                <Syringe className="w-4 h-4" />
-                <span>Vacunas</span>
-              </TabsTrigger>
-              <TabsTrigger value="balanceados" className="flex items-center space-x-2">
-                <Beef className="w-4 h-4" />
-                <span>Balanceados</span>
-              </TabsTrigger>
-              <TabsTrigger value="otros" className="flex items-center space-x-2">
-                <ShoppingCart className="w-4 h-4" />
-                <span>Otros</span>
-              </TabsTrigger>
-            </TabsList>
+          <div className="flex-1 overflow-hidden">
+            <ScrollArea className="h-full">
+              <div className="p-6">
+                <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+                  <TabsList className="grid w-full grid-cols-4 mb-6">
+                    <TabsTrigger value="farmacia" className="flex items-center space-x-2">
+                      <Pill className="w-4 h-4" />
+                      <span>Farmacia</span>
+                    </TabsTrigger>
+                    <TabsTrigger value="vacunas" className="flex items-center space-x-2">
+                      <Syringe className="w-4 h-4" />
+                      <span>Vacunas</span>
+                    </TabsTrigger>
+                    <TabsTrigger value="balanceados" className="flex items-center space-x-2">
+                      <Beef className="w-4 h-4" />
+                      <span>Balanceados</span>
+                    </TabsTrigger>
+                    <TabsTrigger value="otros" className="flex items-center space-x-2">
+                      <ShoppingCart className="w-4 h-4" />
+                      <span>Otros</span>
+                    </TabsTrigger>
+                  </TabsList>
 
-            {/* Tab de Farmacia */}
-            <TabsContent value="farmacia" className="mt-6">
-              <div className="mb-4 flex justify-between items-center">
-                <h3 className="text-lg font-semibold text-gray-900">Medicamentos</h3>
-                <Button className="bg-gray-800 hover:bg-black">
-                  <Plus className="w-4 h-4 mr-2" />
-                  Agregar Medicamento
-                </Button>
-              </div>
-              
-              <div className="border rounded-lg">
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Medicamento</TableHead>
-                      <TableHead>Laboratorio</TableHead>
-                      <TableHead>Stock</TableHead>
-                      <TableHead>Estado</TableHead>
-                      <TableHead>Precio</TableHead>
-                      <TableHead>Vencimiento</TableHead>
-                      <TableHead>Lote</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {farmaciaStock.map((item) => {
-                      const status = getStockStatus(item.stock, item.stockMinimo);
-                      return (
-                        <TableRow key={item.id}>
-                          <TableCell className="font-medium">{item.nombre}</TableCell>
-                          <TableCell>{item.laboratorio}</TableCell>
-                          <TableCell>{item.stock} unidades</TableCell>
-                          <TableCell>
-                            <Badge className={status.color}>{status.label}</Badge>
-                          </TableCell>
-                          <TableCell>${item.precio}</TableCell>
-                          <TableCell>{item.fechaVencimiento}</TableCell>
-                          <TableCell>{item.lote}</TableCell>
-                        </TableRow>
-                      );
-                    })}
-                  </TableBody>
-                </Table>
-              </div>
-            </TabsContent>
+                  <TabsContent value="farmacia" className="mt-6">
+                    <div className="mb-4 flex justify-between items-center">
+                      <h3 className="text-lg font-semibold text-gray-900">Medicamentos</h3>
+                      <Button className="bg-gray-800 hover:bg-black">
+                        <Plus className="w-4 h-4 mr-2" />
+                        Agregar Medicamento
+                      </Button>
+                    </div>
+                    
+                    <div className="border rounded-lg">
+                      <Table>
+                        <TableHeader>
+                          <TableRow>
+                            <TableHead>Medicamento</TableHead>
+                            <TableHead>Laboratorio</TableHead>
+                            <TableHead>Stock</TableHead>
+                            <TableHead>Estado</TableHead>
+                            <TableHead>Precio</TableHead>
+                            <TableHead>Vencimiento</TableHead>
+                            <TableHead>Lote</TableHead>
+                          </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                          {farmaciaStock.map((item) => {
+                            const status = getStockStatus(item.stock, item.stockMinimo);
+                            return (
+                              <TableRow key={item.id}>
+                                <TableCell className="font-medium">{item.nombre}</TableCell>
+                                <TableCell>{item.laboratorio}</TableCell>
+                                <TableCell>{item.stock} unidades</TableCell>
+                                <TableCell>
+                                  <Badge className={status.color}>{status.label}</Badge>
+                                </TableCell>
+                                <TableCell>${item.precio}</TableCell>
+                                <TableCell>{item.fechaVencimiento}</TableCell>
+                                <TableCell>{item.lote}</TableCell>
+                              </TableRow>
+                            );
+                          })}
+                        </TableBody>
+                      </Table>
+                    </div>
+                  </TabsContent>
 
-            {/* Tab de Vacunas */}
-            <TabsContent value="vacunas" className="mt-6">
-              <div className="mb-4 flex justify-between items-center">
-                <h3 className="text-lg font-semibold text-gray-900">Vacunas</h3>
-                <Button className="bg-gray-800 hover:bg-black">
-                  <Plus className="w-4 h-4 mr-2" />
-                  Agregar Vacuna
-                </Button>
-              </div>
-              
-              <div className="border rounded-lg">
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Vacuna</TableHead>
-                      <TableHead>Laboratorio</TableHead>
-                      <TableHead>Stock</TableHead>
-                      <TableHead>Estado</TableHead>
-                      <TableHead>Precio</TableHead>
-                      <TableHead>Vencimiento</TableHead>
-                      <TableHead>Lote</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {vacunasStock.map((item) => {
-                      const status = getStockStatus(item.stock, item.stockMinimo);
-                      return (
-                        <TableRow key={item.id}>
-                          <TableCell className="font-medium">{item.nombre}</TableCell>
-                          <TableCell>{item.laboratorio}</TableCell>
-                          <TableCell>{item.stock} dosis</TableCell>
-                          <TableCell>
-                            <Badge className={status.color}>{status.label}</Badge>
-                          </TableCell>
-                          <TableCell>${item.precio}</TableCell>
-                          <TableCell>{item.fechaVencimiento}</TableCell>
-                          <TableCell>{item.lote}</TableCell>
-                        </TableRow>
-                      );
-                    })}
-                  </TableBody>
-                </Table>
-              </div>
-            </TabsContent>
+                  <TabsContent value="vacunas" className="mt-6">
+                    <div className="mb-4 flex justify-between items-center">
+                      <h3 className="text-lg font-semibold text-gray-900">Vacunas</h3>
+                      <Button className="bg-gray-800 hover:bg-black">
+                        <Plus className="w-4 h-4 mr-2" />
+                        Agregar Vacuna
+                      </Button>
+                    </div>
+                    
+                    <div className="border rounded-lg">
+                      <Table>
+                        <TableHeader>
+                          <TableRow>
+                            <TableHead>Vacuna</TableHead>
+                            <TableHead>Laboratorio</TableHead>
+                            <TableHead>Stock</TableHead>
+                            <TableHead>Estado</TableHead>
+                            <TableHead>Precio</TableHead>
+                            <TableHead>Vencimiento</TableHead>
+                            <TableHead>Lote</TableHead>
+                          </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                          {vacunasStock.map((item) => {
+                            const status = getStockStatus(item.stock, item.stockMinimo);
+                            return (
+                              <TableRow key={item.id}>
+                                <TableCell className="font-medium">{item.nombre}</TableCell>
+                                <TableCell>{item.laboratorio}</TableCell>
+                                <TableCell>{item.stock} dosis</TableCell>
+                                <TableCell>
+                                  <Badge className={status.color}>{status.label}</Badge>
+                                </TableCell>
+                                <TableCell>${item.precio}</TableCell>
+                                <TableCell>{item.fechaVencimiento}</TableCell>
+                                <TableCell>{item.lote}</TableCell>
+                              </TableRow>
+                            );
+                          })}
+                        </TableBody>
+                      </Table>
+                    </div>
+                  </TabsContent>
 
-            {/* Tab de Balanceados */}
-            <TabsContent value="balanceados" className="mt-6">
-              <div className="mb-4 flex justify-between items-center">
-                <h3 className="text-lg font-semibold text-gray-900">Alimentos Balanceados</h3>
-                <Button className="bg-gray-800 hover:bg-black">
-                  <Plus className="w-4 h-4 mr-2" />
-                  Agregar Alimento
-                </Button>
-              </div>
-              
-              <div className="border rounded-lg">
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Producto</TableHead>
-                      <TableHead>Presentación</TableHead>
-                      <TableHead>Stock</TableHead>
-                      <TableHead>Estado</TableHead>
-                      <TableHead>Precio</TableHead>
-                      <TableHead>Vencimiento</TableHead>
-                      <TableHead>Proveedor</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {balanceadosStock.map((item) => {
-                      const status = getStockStatus(item.stock, item.stockMinimo);
-                      return (
-                        <TableRow key={item.id}>
-                          <TableCell className="font-medium">{item.nombre}</TableCell>
-                          <TableCell>{item.presentacion}</TableCell>
-                          <TableCell>{item.stock} unidades</TableCell>
-                          <TableCell>
-                            <Badge className={status.color}>{status.label}</Badge>
-                          </TableCell>
-                          <TableCell>${item.precio}</TableCell>
-                          <TableCell>{item.fechaVencimiento}</TableCell>
-                          <TableCell>{item.proveedor}</TableCell>
-                        </TableRow>
-                      );
-                    })}
-                  </TableBody>
-                </Table>
-              </div>
-            </TabsContent>
+                  <TabsContent value="balanceados" className="mt-6">
+                    <div className="mb-4 flex justify-between items-center">
+                      <h3 className="text-lg font-semibold text-gray-900">Alimentos Balanceados</h3>
+                      <Button className="bg-gray-800 hover:bg-black">
+                        <Plus className="w-4 h-4 mr-2" />
+                        Agregar Alimento
+                      </Button>
+                    </div>
+                    
+                    <div className="border rounded-lg">
+                      <Table>
+                        <TableHeader>
+                          <TableRow>
+                            <TableHead>Producto</TableHead>
+                            <TableHead>Presentación</TableHead>
+                            <TableHead>Stock</TableHead>
+                            <TableHead>Estado</TableHead>
+                            <TableHead>Precio</TableHead>
+                            <TableHead>Vencimiento</TableHead>
+                            <TableHead>Proveedor</TableHead>
+                          </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                          {balanceadosStock.map((item) => {
+                            const status = getStockStatus(item.stock, item.stockMinimo);
+                            return (
+                              <TableRow key={item.id}>
+                                <TableCell className="font-medium">{item.nombre}</TableCell>
+                                <TableCell>{item.presentacion}</TableCell>
+                                <TableCell>{item.stock} unidades</TableCell>
+                                <TableCell>
+                                  <Badge className={status.color}>{status.label}</Badge>
+                                </TableCell>
+                                <TableCell>${item.precio}</TableCell>
+                                <TableCell>{item.fechaVencimiento}</TableCell>
+                                <TableCell>{item.proveedor}</TableCell>
+                              </TableRow>
+                            );
+                          })}
+                        </TableBody>
+                      </Table>
+                    </div>
+                  </TabsContent>
 
-            {/* Tab de Otros */}
-            <TabsContent value="otros" className="mt-6">
-              <div className="mb-4 flex justify-between items-center">
-                <h3 className="text-lg font-semibold text-gray-900">Otros Productos</h3>
-                <Button className="bg-gray-800 hover:bg-black">
-                  <Plus className="w-4 h-4 mr-2" />
-                  Agregar Producto
-                </Button>
+                  <TabsContent value="otros" className="mt-6">
+                    <div className="mb-4 flex justify-between items-center">
+                      <h3 className="text-lg font-semibold text-gray-900">Otros Productos</h3>
+                      <Button className="bg-gray-800 hover:bg-black">
+                        <Plus className="w-4 h-4 mr-2" />
+                        Agregar Producto
+                      </Button>
+                    </div>
+                    
+                    <div className="border rounded-lg">
+                      <Table>
+                        <TableHeader>
+                          <TableRow>
+                            <TableHead>Producto</TableHead>
+                            <TableHead>Categoría</TableHead>
+                            <TableHead>Stock</TableHead>
+                            <TableHead>Estado</TableHead>
+                            <TableHead>Precio</TableHead>
+                            <TableHead>Vencimiento</TableHead>
+                            <TableHead>Proveedor</TableHead>
+                          </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                          {otrosStock.map((item) => {
+                            const status = getStockStatus(item.stock, item.stockMinimo);
+                            return (
+                              <TableRow key={item.id}>
+                                <TableCell className="font-medium">{item.nombre}</TableCell>
+                                <TableCell>{item.categoria}</TableCell>
+                                <TableCell>{item.stock} unidades</TableCell>
+                                <TableCell>
+                                  <Badge className={status.color}>{status.label}</Badge>
+                                </TableCell>
+                                <TableCell>${item.precio}</TableCell>
+                                <TableCell>{item.fechaVencimiento || 'N/A'}</TableCell>
+                                <TableCell>{item.proveedor}</TableCell>
+                              </TableRow>
+                            );
+                          })}
+                        </TableBody>
+                      </Table>
+                    </div>
+                  </TabsContent>
+                </Tabs>
               </div>
-              
-              <div className="border rounded-lg">
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Producto</TableHead>
-                      <TableHead>Categoría</TableHead>
-                      <TableHead>Stock</TableHead>
-                      <TableHead>Estado</TableHead>
-                      <TableHead>Precio</TableHead>
-                      <TableHead>Vencimiento</TableHead>
-                      <TableHead>Proveedor</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {otrosStock.map((item) => {
-                      const status = getStockStatus(item.stock, item.stockMinimo);
-                      return (
-                        <TableRow key={item.id}>
-                          <TableCell className="font-medium">{item.nombre}</TableCell>
-                          <TableCell>{item.categoria}</TableCell>
-                          <TableCell>{item.stock} unidades</TableCell>
-                          <TableCell>
-                            <Badge className={status.color}>{status.label}</Badge>
-                          </TableCell>
-                          <TableCell>${item.precio}</TableCell>
-                          <TableCell>{item.fechaVencimiento || 'N/A'}</TableCell>
-                          <TableCell>{item.proveedor}</TableCell>
-                        </TableRow>
-                      );
-                    })}
-                  </TableBody>
-                </Table>
-              </div>
-            </TabsContent>
-          </Tabs>
-        </ScrollArea>
+            </ScrollArea>
+          </div>
 
-        <div className="flex justify-end space-x-2 pt-4 border-t flex-shrink-0">
-          <Button variant="outline" onClick={() => onOpenChange(false)}>
-            Cerrar
-          </Button>
-          <Button className="bg-gray-800 hover:bg-black">
-            Generar Reporte
-          </Button>
+          <div className="px-6 py-4 border-t bg-white">
+            <div className="flex justify-end space-x-2">
+              <Button variant="outline" onClick={() => onOpenChange(false)}>
+                Cerrar
+              </Button>
+              <Button className="bg-gray-800 hover:bg-black">
+                Generar Reporte
+              </Button>
+            </div>
+          </div>
         </div>
       </DialogContent>
     </Dialog>
