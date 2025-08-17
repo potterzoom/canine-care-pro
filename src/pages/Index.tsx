@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -60,8 +61,8 @@ const Index = () => {
   const [telemedicineOpen, setTelemedicineOpen] = useState(false);
   const [virtualAssistantOpen, setVirtualAssistantOpen] = useState(false);
 
-  const { dailyStats, isLoading: statsLoading } = useDailyStats();
-  const { todayPatients, isLoading: patientsLoading } = useTodayPatients();
+  const { stats } = useDailyStats();
+  const { todayPatients } = useTodayPatients();
 
   const menuItems = [
     {
@@ -123,25 +124,33 @@ const Index = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <StatsCard 
             title="Citas Hoy" 
-            value={statsLoading ? "..." : dailyStats.appointments} 
+            value={stats.scheduledAppointments.toString()} 
+            change="+2 desde ayer"
+            trend="up"
             icon={Calendar} 
             color="blue" 
           />
           <StatsCard 
             title="Pacientes Activos" 
-            value={statsLoading ? "..." : dailyStats.activePatients} 
+            value={stats.patientsAttended.toString()} 
+            change="+5 esta semana"
+            trend="up"
             icon={Users} 
             color="green" 
           />
           <StatsCard 
-            title="Cirugías Programadas" 
-            value={statsLoading ? "..." : dailyStats.surgeries} 
+            title="Horas de Consulta" 
+            value={Math.floor(stats.consultationHours).toString()} 
+            change="Tiempo activo"
+            trend="neutral"
             icon={Activity} 
             color="orange" 
           />
           <StatsCard 
-            title="Items en Stock" 
-            value={statsLoading ? "..." : dailyStats.stockItems} 
+            title="Alertas Activas" 
+            value={stats.activeAlerts.toString()} 
+            change="Requieren atención"
+            trend="down"
             icon={Package} 
             color="purple" 
           />
@@ -187,19 +196,22 @@ const Index = () => {
                   petName="Luna" 
                   ownerName="María García" 
                   time="10:00 AM" 
-                  service="Consulta General" 
+                  type="Consulta General"
+                  status="confirmed"
                 />
                 <AppointmentCard 
                   petName="Max" 
                   ownerName="Carlos López" 
                   time="11:30 AM" 
-                  service="Vacunación" 
+                  type="Vacunación"
+                  status="pending"
                 />
                 <AppointmentCard 
                   petName="Bella" 
                   ownerName="Ana Martínez" 
                   time="2:00 PM" 
-                  service="Cirugía Menor" 
+                  type="Cirugía Menor"
+                  status="confirmed"
                 />
               </div>
             </div>
@@ -208,19 +220,14 @@ const Index = () => {
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Pacientes de Hoy</h3>
               <div className="space-y-3">
-                {patientsLoading ? (
-                  <div className="text-sm text-gray-500">Cargando...</div>
-                ) : (
-                  todayPatients.map((patient, index) => (
-                    <PatientCard 
-                      key={index}
-                      name={patient.name} 
-                      species={patient.species} 
-                      lastVisit={patient.lastVisit} 
-                      status={patient.status} 
-                    />
-                  ))
-                )}
+                {todayPatients.map((patient, index) => (
+                  <PatientCard 
+                    key={index}
+                    name={patient.name} 
+                    species={patient.species} 
+                    lastVisit={patient.lastVisit} 
+                  />
+                ))}
               </div>
             </div>
 
@@ -228,9 +235,9 @@ const Index = () => {
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Stock Crítico</h3>
               <div className="space-y-3">
-                <InventoryItem name="Vacuna Rabia" quantity={3} minStock={10} />
-                <InventoryItem name="Antibiótico XYZ" quantity={5} minStock={15} />
-                <InventoryItem name="Analgésico ABC" quantity={2} minStock={8} />
+                <InventoryItem name="Vacuna Rabia" stock={3} minStock={10} />
+                <InventoryItem name="Antibiótico XYZ" stock={5} minStock={15} />
+                <InventoryItem name="Analgésico ABC" stock={2} minStock={8} />
               </div>
             </div>
           </div>
@@ -241,72 +248,72 @@ const Index = () => {
 
       {/* Modals */}
       <NewAppointmentModal 
-        isOpen={newAppointmentOpen} 
-        onClose={() => setNewAppointmentOpen(false)} 
+        open={newAppointmentOpen} 
+        onOpenChange={setNewAppointmentOpen} 
       />
       <StockModal 
-        isOpen={stockOpen} 
-        onClose={() => setStockOpen(false)} 
+        open={stockOpen} 
+        onOpenChange={setStockOpen} 
       />
       <ConfigModal 
-        isOpen={configOpen} 
-        onClose={() => setConfigOpen(false)} 
+        open={configOpen} 
+        onOpenChange={setConfigOpen} 
       />
       <ContactModal 
-        isOpen={contactOpen} 
-        onClose={() => setContactOpen(false)} 
+        open={contactOpen} 
+        onOpenChange={setContactOpen} 
       />
       <UserManagementModal 
-        isOpen={userManagementOpen} 
-        onClose={() => setUserManagementOpen(false)} 
+        open={userManagementOpen} 
+        onOpenChange={setUserManagementOpen} 
       />
       <UserProfileModal 
-        isOpen={userProfileOpen} 
-        onClose={() => setUserProfileOpen(false)} 
+        open={userProfileOpen} 
+        onOpenChange={setUserProfileOpen} 
       />
       <ScheduledAppointmentsModal 
-        isOpen={scheduledAppointmentsOpen} 
-        onClose={() => setScheduledAppointmentsOpen(false)} 
+        open={scheduledAppointmentsOpen} 
+        onOpenChange={setScheduledAppointmentsOpen} 
       />
       <PatientsAttendedModal 
-        isOpen={patientsAttendedOpen} 
-        onClose={() => setPatientsAttendedOpen(false)} 
+        open={patientsAttendedOpen} 
+        onOpenChange={setPatientsAttendedOpen} 
       />
       <PatientHistoryModal 
-        isOpen={patientHistoryOpen} 
-        onClose={() => setPatientHistoryOpen(false)} 
+        open={patientHistoryOpen} 
+        onOpenChange={setPatientHistoryOpen} 
       />
       <NewMedicalHistoryModal 
-        isOpen={newMedicalHistoryOpen} 
-        onClose={() => setNewMedicalHistoryOpen(false)} 
+        open={newMedicalHistoryOpen} 
+        onOpenChange={setNewMedicalHistoryOpen} 
       />
       <ClientSearchModal 
-        isOpen={clientSearchOpen} 
-        onClose={() => setClientSearchOpen(false)} 
+        open={clientSearchOpen} 
+        onOpenChange={setClientSearchOpen} 
       />
       <ServicesModal 
-        isOpen={servicesOpen} 
-        onClose={() => setServicesOpen(false)} 
+        open={servicesOpen} 
+        onOpenChange={setServicesOpen} 
       />
       <BillingModal 
-        isOpen={billingOpen} 
-        onClose={() => setBillingOpen(false)} 
+        open={billingOpen} 
+        onOpenChange={setBillingOpen} 
       />
       <SecurityAuditModal 
-        isOpen={securityAuditOpen} 
-        onClose={() => setSecurityAuditOpen(false)} 
+        open={securityAuditOpen} 
+        onOpenChange={setSecurityAuditOpen} 
       />
       <VaccineControlModal 
-        isOpen={vaccineControlOpen} 
-        onClose={() => setVaccineControlOpen(false)} 
+        open={vaccineControlOpen} 
+        onOpenChange={setVaccineControlOpen} 
       />
       <TelemedicineModal 
-        isOpen={telemedicineOpen} 
-        onClose={() => setTelemedicineOpen(false)} 
+        open={telemedicineOpen} 
+        onOpenChange={setTelemedicineOpen} 
       />
       <VirtualAssistantModal 
-        isOpen={virtualAssistantOpen} 
-        onClose={() => setVirtualAssistantOpen(false)} 
+        open={virtualAssistantOpen} 
+        onOpenChange={setVirtualAssistantOpen} 
       />
     </div>
   );
