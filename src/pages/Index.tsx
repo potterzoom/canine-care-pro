@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -195,7 +194,6 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <Header 
-        onAlertsClick={() => setAlertsOpen(true)}
         onConfigClick={() => setConfigOpen(true)}
         onCallClick={() => setContactOpen(true)}
         onUserManagementClick={() => setUserManagementOpen(true)}
