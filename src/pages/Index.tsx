@@ -110,6 +110,11 @@ const Index = () => {
     }
   ];
 
+  const handleClientSelect = (client: any) => {
+    console.log('Cliente seleccionado:', client);
+    setClientSearchOpen(false);
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <Header 
@@ -225,7 +230,12 @@ const Index = () => {
                     key={index}
                     name={patient.name} 
                     species={patient.species} 
+                    breed={patient.breed}
+                    age={patient.age}
+                    owner={patient.owner}
                     lastVisit={patient.lastVisit} 
+                    nextVaccine={patient.nextVaccine}
+                    urgent={patient.urgent}
                   />
                 ))}
               </div>
@@ -235,9 +245,30 @@ const Index = () => {
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Stock Crítico</h3>
               <div className="space-y-3">
-                <InventoryItem name="Vacuna Rabia" stock={3} minStock={10} />
-                <InventoryItem name="Antibiótico XYZ" stock={5} minStock={15} />
-                <InventoryItem name="Analgésico ABC" stock={2} minStock={8} />
+                <InventoryItem 
+                  name="Vacuna Rabia" 
+                  category="Vacunas"
+                  stock={3} 
+                  minStock={10} 
+                  expiryDate="30 Dic 2024"
+                  price={25.99}
+                />
+                <InventoryItem 
+                  name="Antibiótico XYZ" 
+                  category="Medicamentos"
+                  stock={5} 
+                  minStock={15} 
+                  expiryDate="15 Feb 2025"
+                  price={18.50}
+                />
+                <InventoryItem 
+                  name="Analgésico ABC" 
+                  category="Medicamentos"
+                  stock={2} 
+                  minStock={8} 
+                  expiryDate="10 Mar 2025"
+                  price={12.75}
+                />
               </div>
             </div>
           </div>
@@ -289,7 +320,9 @@ const Index = () => {
       />
       <ClientSearchModal 
         open={clientSearchOpen} 
-        onOpenChange={setClientSearchOpen} 
+        onOpenChange={setClientSearchOpen}
+        onClientSelect={handleClientSelect}
+        title="Buscar Cliente"
       />
       <ServicesModal 
         open={servicesOpen} 
