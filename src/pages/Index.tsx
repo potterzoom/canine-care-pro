@@ -151,14 +151,6 @@ const Index = () => {
             icon={Activity} 
             color="orange" 
           />
-          <StatsCard 
-            title="Alertas Activas" 
-            value={stats.activeAlerts.toString()} 
-            change="Requieren atención"
-            trend="down"
-            icon={Package} 
-            color="purple" 
-          />
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
