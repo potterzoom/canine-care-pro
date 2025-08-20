@@ -1,15 +1,16 @@
 
 import React from 'react';
-import { User, Search, Settings, Phone } from 'lucide-react';
+import { Bell, User, Search, Settings, Phone, Shield } from 'lucide-react';
 
 interface HeaderProps {
+  onAlertsClick?: () => void;
   onConfigClick?: () => void;
   onCallClick?: () => void;
   onUserManagementClick?: () => void;
   onUserProfileClick?: () => void;
 }
 
-const Header = ({ onConfigClick, onCallClick, onUserManagementClick, onUserProfileClick }: HeaderProps) => {
+const Header = ({ onAlertsClick, onConfigClick, onCallClick, onUserManagementClick, onUserProfileClick }: HeaderProps) => {
   return (
     <header className="bg-white shadow-sm border-b border-gray-200 px-6 py-4">
       <div className="flex items-center justify-between max-w-7xl mx-auto">
@@ -38,6 +39,14 @@ const Header = ({ onConfigClick, onCallClick, onUserManagementClick, onUserProfi
 
         {/* Acciones del usuario */}
         <div className="flex items-center space-x-4">
+          <button 
+            onClick={onAlertsClick}
+            className="relative p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors"
+          >
+            <Bell className="w-5 h-5" />
+            <span className="absolute -top-1 -right-1 w-3 h-3 bg-black rounded-full"></span>
+          </button>
+          
           <button 
             onClick={onCallClick}
             className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors"
