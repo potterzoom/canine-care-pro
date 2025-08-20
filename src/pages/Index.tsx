@@ -215,15 +215,7 @@ const Index = () => {
 
         {/* Botones de acceso rápido a modales */}
         <div className="mb-8 flex flex-wrap gap-4">
-          <button 
-            onClick={() => setAlertsOpen(true)}
-            className="flex items-center space-x-2 px-4 py-2 bg-gray-800 hover:bg-black text-white rounded-lg transition-colors"
-          >
-            <Bell className="w-4 h-4" />
-            <span>Ver Alertas</span>
-          </button>
-          
-          <button 
+          <button
             onClick={() => setNewAppointmentOpen(true)}
             className="flex items-center space-x-2 px-4 py-2 bg-gray-700 hover:bg-gray-800 text-white rounded-lg transition-colors"
           >
