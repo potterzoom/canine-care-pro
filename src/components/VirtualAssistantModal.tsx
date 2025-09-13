@@ -187,7 +187,7 @@ const VirtualAssistantModal = ({ open, onOpenChange }: VirtualAssistantModalProp
           </DialogTitle>
         </DialogHeader>
 
-        <div className="grid grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
           {/* Chat Interface */}
           <div className="space-y-4">
             <div className="bg-gray-50 rounded-lg p-4 h-96 overflow-y-auto">
