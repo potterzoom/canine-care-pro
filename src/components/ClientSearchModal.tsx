@@ -47,7 +47,7 @@ const ClientSearchModal = ({ open, onOpenChange, onClientSelect, title }: Client
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-md">
+      <DialogContent className="max-w-5xl max-h-[85vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="flex items-center space-x-2">
             <Search className="w-5 h-5" />
