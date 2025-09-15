@@ -24,9 +24,12 @@ import PatientsAttendedModal from '../components/PatientsAttendedModal';
 import ScheduledAppointmentsModal from '../components/ScheduledAppointmentsModal';
 import VirtualAssistantModal from '../components/VirtualAssistantModal';
 import SecurityAuditModal from '../components/SecurityAuditModal';
+import ServiceInvoiceModal from '../components/ServiceInvoiceModal';
+import SurgeryPlanningModal from '../components/SurgeryPlanningModal';
+import GroomingServicesModal from '../components/GroomingServicesModal';
 import { useDailyStats } from '../hooks/useDailyStats';
 import { useTodayPatients } from '../hooks/useTodayPatients';
-import { Calendar, User, Bell, Plus, Settings, FileText, Phone, Syringe, Receipt, Video, Package, Stethoscope, DollarSign, Clock, Bot, Shield, Play, Pause } from 'lucide-react';
+import { Calendar, User, Bell, Plus, Settings, FileText, Phone, Syringe, Receipt, Video, Package, Stethoscope, DollarSign, Clock, Bot, Shield, Play, Pause, Scissors, Bath } from 'lucide-react';
 
 const Index = () => {
   // Estados para controlar los modales
@@ -47,6 +50,9 @@ const Index = () => {
   const [scheduledAppointmentsOpen, setScheduledAppointmentsOpen] = useState(false);
   const [virtualAssistantOpen, setVirtualAssistantOpen] = useState(false);
   const [securityAuditOpen, setSecurityAuditOpen] = useState(false);
+  const [serviceInvoiceOpen, setServiceInvoiceOpen] = useState(false);
+  const [surgeryPlanningOpen, setSurgeryPlanningOpen] = useState(false);
+  const [groomingServicesOpen, setGroomingServicesOpen] = useState(false);
   
   // Estados para el buscador de clientes
   const [clientSearchOpen, setClientSearchOpen] = useState(false);
@@ -280,6 +286,30 @@ const Index = () => {
           </button>
           
           <button 
+            onClick={() => setServiceInvoiceOpen(true)}
+            className="flex items-center space-x-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg transition-colors"
+          >
+            <Receipt className="w-4 h-4" />
+            <span>Factura Servicios</span>
+          </button>
+          
+          <button 
+            onClick={() => setSurgeryPlanningOpen(true)}
+            className="flex items-center space-x-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-colors"
+          >
+            <Scissors className="w-4 h-4" />
+            <span>Cirugías</span>
+          </button>
+          
+          <button 
+            onClick={() => setGroomingServicesOpen(true)}
+            className="flex items-center space-x-2 px-4 py-2 bg-pink-600 hover:bg-pink-700 text-white rounded-lg transition-colors"
+          >
+            <Bath className="w-4 h-4" />
+            <span>Pet Friends</span>
+          </button>
+
+          <button 
             onClick={() => setConfigOpen(true)}
             className="flex items-center space-x-2 px-4 py-2 bg-gray-900 hover:bg-black text-white rounded-lg transition-colors"
           >
@@ -419,8 +449,41 @@ const Index = () => {
                 >
                   <span className="text-xl">📄</span>
                   <div>
-                    <p className="font-medium text-gray-900">Facturación</p>
-                    <p className="text-sm text-gray-500">Generar facturas</p>
+                    <p className="font-medium text-gray-900">Facturación Básica</p>
+                    <p className="text-sm text-gray-500">Facturas simples</p>
+                  </div>
+                </button>
+                
+                <button 
+                  onClick={() => setServiceInvoiceOpen(true)}
+                  className="w-full flex items-center space-x-3 p-3 text-left hover:bg-gray-50 rounded-lg transition-colors"
+                >
+                  <span className="text-xl">💰</span>
+                  <div>
+                    <p className="font-medium text-gray-900">Factura Servicios</p>
+                    <p className="text-sm text-gray-500">Servicios, balanceados, vacunas</p>
+                  </div>
+                </button>
+                
+                <button 
+                  onClick={() => setSurgeryPlanningOpen(true)}
+                  className="w-full flex items-center space-x-3 p-3 text-left hover:bg-gray-50 rounded-lg transition-colors"
+                >
+                  <span className="text-xl">⚕️</span>
+                  <div>
+                    <p className="font-medium text-gray-900">Cirugías</p>
+                    <p className="text-sm text-gray-500">Planificación y control</p>
+                  </div>
+                </button>
+                
+                <button 
+                  onClick={() => setGroomingServicesOpen(true)}
+                  className="w-full flex items-center space-x-3 p-3 text-left hover:bg-gray-50 rounded-lg transition-colors"
+                >
+                  <span className="text-xl">🐾</span>
+                  <div>
+                    <p className="font-medium text-gray-900">Pet Friends</p>
+                    <p className="text-sm text-gray-500">Baños, cortes, limpieza</p>
                   </div>
                 </button>
                 
@@ -471,6 +534,11 @@ const Index = () => {
       {/* Nuevos Modales Avanzados */}
       <VirtualAssistantModal open={virtualAssistantOpen} onOpenChange={setVirtualAssistantOpen} />
       <SecurityAuditModal open={securityAuditOpen} onOpenChange={setSecurityAuditOpen} />
+      
+      {/* Modales de Facturación y Servicios Especializados */}
+      <ServiceInvoiceModal open={serviceInvoiceOpen} onOpenChange={setServiceInvoiceOpen} />
+      <SurgeryPlanningModal open={surgeryPlanningOpen} onOpenChange={setSurgeryPlanningOpen} />
+      <GroomingServicesModal open={groomingServicesOpen} onOpenChange={setGroomingServicesOpen} />
       
       {/* Modal de búsqueda de clientes */}
       <ClientSearchModal
